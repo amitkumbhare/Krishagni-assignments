@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+        <title>Bash Script Example</title>
+        <style>
+                body {
+                        font-family: Arial, sans-serif;
+                        font-size: 16px;
+                        line-height: 1.5;
+                        color: #333;
+                        margin: 0;
+                        padding: 0;
+                        background-color: #f7f7f7;
+                }
+
+                .container {
+                        max-width: 800px;
+                        margin: 0 auto;
+                        padding: 20px;
+                        background-color: #fff;
+                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                }
+
+                h1 {
+                        font-size: 32px;
+                        margin-bottom: 20px;
+                        text-align: center;
+                        color: #333;
+                }
+
+                p {
+                        margin-bottom: 20px;
+                        line-height: 1.5;
+                }
+
+                pre {
+                        background-color: #f5f5f5;
+                        padding: 10px;
+                        overflow-x: auto;
+                        font-family: "Courier New", monospace;
+                        font-size: 14px;
+                        line-height: 1.2;
+                        color: #333;
+                }
+                .output-image {
+                        display: block;
+                        margin-top: 20px;
+                        max-width: 100%;
+                        height: auto;
+                }
+        </style>
+
+  </head>
+  <body>
+    <div class="container">
+        <h1>Bash Script Example</h1>
+        <p>This script checks if the provided input is a file or directory and performs actions accordingly.</p>
+
+	<h2>Script:</h2>
+	<pre>
+	        #!/bin/bash
+
+	        echo "Enter the file we need to copy:"
+	        read f1
+	        echo "Enter the file to which the data will be copy:"
+	        read f2
+	        x=1
+	        for((j=1;j<=$x;j++))
+	        do
+	                cat $f1 >> $f2
+	                break
+	        done
+	        echo "The data copied successfully from $f1 to $f2"
+	</pre>
+        <p>The output of the script is displayed in the terminal.</p>
+        <img class="output-image" src="/home/asta/Desktop/Linux Training/Bash-scripting/amitkumbhare/copy-data-from-one-file-to-another.png" alt="Output Screenshot">
+
+        <h2>Explanation:</h2>
+        <ul>
+		<li>The first line (#!/bin/bash) is called the shebang line. It specifies the interpreter to be used to execute the script, in this case, it's the bash shell.</li>
+		<li>The second line prints a message asking the user to enter the name of the file they want to copy.</li>
+		<li>The third line reads in the user input using the read command and stores it in the variable f1.</li>
+		<li>The fourth line prints a message asking the user to enter the name of the file to which they want to copy the data.</li>
+		<li>The fifth line reads in the user input using the read command and stores it in the variable f2.</li>
+		<li>The sixth line initializes the variable x to the value 1.</li>
+		<li>The for loop starting from the seventh line is used to copy the contents of the file specified by the user in f1 to the file specified in f2.</li>
+		<li>The loop runs exactly once because the value of x is set to 1 and the loop condition (j<=$x) is true only for j=1.</li>
+		<li>Within the loop, the cat command is used to append the contents of f1 to f2 using the >> redirection operator.</li>
+		<li>The break statement is used to exit the loop after the first iteration.</li>
+		<li>The script then prints a message indicating that the data has been successfully copied from f1 to f2.</li>
+        </ul>
+    </div>
+  </body>
+</html>
+

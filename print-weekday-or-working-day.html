@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>Print Weekday or Working Day</title>
+        <style>
+                body {
+                        font-family: Arial, sans-serif;
+                        font-size: 16px;
+                        line-height: 1.5;
+                        color: #333;
+                        margin: 0;
+                        padding: 0;
+                        background-color: #f7f7f7;
+                }
+
+                .container {
+                        max-width: 800px;
+                        margin: 0 auto;
+                        padding: 20px;
+                        background-color: #fff;
+                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                }
+
+                h1 {
+                        font-size: 32px;
+                        margin-bottom: 20px;
+                        text-align: center;
+                        color: #333;
+                }
+
+                p {
+                        margin-bottom: 20px;
+                        line-height: 1.5;
+                }
+
+                pre {
+                        background-color: #f5f5f5;
+                        padding: 10px;
+                        overflow-x: auto;
+                        font-family: "Courier New", monospace;
+                        font-size: 14px;
+                        line-height: 1.2;
+                        color: #333;
+                }
+                .output-image {
+                        display: block;
+                        margin-top: 20px;
+                        max-width: 100%;
+                        height: auto;
+                }
+        </style>
+
+
+</head>
+<body>
+        <div class="container">
+        <h1>Weekday or Weekend</h1>
+        <p>This script checks if the provided input is a file or directory and performs actions accordingly.</p>
+
+        <h2>Script:</h2>
+        <pre>
+		#!/bin/bash
+
+		date +'%A'
+		day=`date +'%A'`
+		if [ "$day" == Sunday ]
+		then
+			echo "Its still Week-End."
+		elif [ "$day" == Saturday ]
+		then
+			echo "Week-End stated."
+		else
+			echo "Its Working Day."
+		fi
+        </pre>
+
+        <h2>Explanation:</h2>
+        <ul>
+		<li>The first line (#!/bin/bash) is called the shebang line. It specifies the interpreter to be used to execute the script, in this case, it's the bash shell.</li>
+		<li>The second line uses the date command with the +%A format option to print the current day of the week in the long format (e.g. "Monday", "Tuesday", etc.).</li>
+		<li>The third line stores the day of the week in the day variable.</li>
+		<li>The if-elif-else statement starting from the fourth line checks the value of the day variable to determine whether it is a working day or a weekend.</li>
+		<li>If the value of day is "Sunday", the script prints "Its still Week-End."</li>
+		<li>If the value of day is "Saturday", the script prints "Week-End stated."</li>
+		<li>If the value of day is any other day of the week, the script prints "Its Working Day."</li>
+	</ul>
+
+        <p>The output of the script is displayed in the terminal.</p>
+        <img class="output-image" src="/home/asta/Desktop/Linux Training/Bash-scripting/amitkumbhare/print-weekday-or-working-day.png" alt="Output Screenshot">
+
+        </div>
+</body>
+</html>
+

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>Bash Script Example</title>
+        <style>
+                body {
+                        font-family: Arial, sans-serif;
+                        font-size: 16px;
+                        line-height: 1.5;
+                        color: #333;
+                        margin: 0;
+                        padding: 0;
+                        background-color: #f7f7f7;
+                }
+
+                .container {
+                        max-width: 800px;
+                        margin: 0 auto;
+                        padding: 20px;
+                        background-color: #fff;
+                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                }
+
+                h1 {
+                        font-size: 32px;
+                        margin-bottom: 20px;
+                        text-align: center;
+                        color: #333;
+                }
+
+                p {
+                        margin-bottom: 20px;
+                        line-height: 1.5;
+                }
+
+                pre {
+                        background-color: #f5f5f5;
+                        padding: 10px;
+                        overflow-x: auto;
+                        font-family: "Courier New", monospace;
+                        font-size: 14px;
+                        line-height: 1.2;
+                        color: #333;
+                }
+                .output-image {
+                        display: block;
+                        margin-top: 20px;
+                        max-width: 100%;
+                        height: auto;
+                }
+        </style>
+
+</head>
+<body>
+        <div class="container">
+		<ul>
+		Checking before sending files to the server.
+		</ul>
+        <img class="output-image" src="/home/asta/Desktop/Linux_Training/Bash-scripting/amitkumbhare/2send-multiple-file-in-loop-on-single-sftp-server.png" alt="Output Screenshot">
+        <img class="output-image" src="/home/asta/Desktop/Linux_Training/Bash-scripting/amitkumbhare/1send-multiple-file-in-loop-on-single-sftp-server.png" alt="Output Screenshot">
+        <h1>Bash Script Example</h1>
+	<p>To send multiple file in loop on single sftp server</p>
+
+	<h2>Script:</h2>
+        <pre>
+		#!/bin/bash
+
+		USER="asta"
+		HOST="192.168.122.15"
+
+		NS=( $(find krishagni/ -type f -name "*") )
+
+		len=${#NS[@]}
+		for (( i=0; i&lt;$len; i++ ));
+		do
+		        if [ "$len" -gt "0" ]
+		        then
+		                echo "put ${NS[$i]} ${NS[$i]}"
+		        fi
+
+		done | sftp $USER@$HOST
+	</pre>
+
+
+
+        <h2>Explanation:</h2>
+	<ul>
+	  <li>Sets the variables USER and HOST to the username and IP address of the remote server</li>
+	  <li>Uses the find command to create an array of files in the directory "krishagni" that have any name</li>
+	  <li>Iterates over the array and outputs a string for each file that specifies the "put" command and the source and destination paths</li>
+	  <li>The output from the loop is piped into sftp with the appropriate user and host information</li>
+	</ul>
+        <p>The output of the script is displayed in the terminal.</p>
+        <img class="output-image" src="/home/asta/Desktop/Linux_Training/Bash-scripting/amitkumbhare/3send-multiple-file-in-loop-on-single-sftp-server.png" alt="Output Screenshot">
+        <img class="output-image" src="/home/asta/Desktop/Linux_Training/Bash-scripting/amitkumbhare/4send-multiple-file-in-loop-on-single-sftp-server.png" alt="Output Screenshot">
+
+        </div>
+</body>
+</html>
+
