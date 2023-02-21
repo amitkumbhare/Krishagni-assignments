@@ -48,16 +48,59 @@
                         max-width: 100%;
                         height: auto;
                 }
+		
+		/* Style the menu bar */
+	      .menu {
+			background-color: #333;
+			color: white;
+			width: 200px;
+			height: 100%;
+			position: fixed;
+			top: 0;
+			left: 0;
+			padding: 20px;
+	      }
+	      
+	      /* Style the menu items */
+	      .menu a {
+		      display: block;
+		      color: white;
+		      padding: 10px;
+		      text-decoration: none;
+	      }
+
+	      /* Style the selected menu item */
+	      .menu a.active {
+		      background-color: #4CAF50;
+	      }
+
+	      /* Style the page content */
+	      .content {
+		      margin-left: 200px;
+		      padding: 20px;
+	      }
         </style>
 
 </head>
 <body>
         <div class="container">
-	<h1>Bash Script Example</h1>
-	<p>This script checks if the provided input is a file or directory and performs actions accordingly.</p>
+		<!-- Menu bar -->
+		<div class="menu">
+			<!--a href="index.html">Home</a-->
+			<a href="nav-bar.html">Home</a>
+			<a href="check-whether-file-or-directory.html" class="active">Check Whether File or Directory</a>
+			<a href="copy-data-from-one-file-to-another.html">Copy Data from One File to Another</a>
+			<a href="find_the_Largest_Number.html">Find the Largest Number</a>
+			<a href="print-weekday-or-working-day.html">Print Weekday or Working Day</a>
+			<a href="print_matching_keyword_line.html">Print Matching Keyword Line</a>
+			<a href="send-multiple-file-in-loop-on-single-sftp-server.html">Send Multiple File in Loop on Single SFTP Server</a>
+			<a href="upload-file-using-sftp.html">Upload File Using SFTP</a>
+		</div>
+		<h1>Bash Script Example</h1>
+		<p>This script checks if the provided input is a file or directory and performs actions accordingly.</p>
 
-	<h2>Script:</h2>
-	<pre>
+		<h2>Script:</h2>
+		<pre>
 #!/bin/bash
 
 for x in $*
@@ -82,21 +125,22 @@ do
 		echo "enter vaild file name or directory."
 	fi
 done
-	</pre>
-        <p>The output of the script is displayed in the terminal.</p>
-        <img class="output-image" src="check-whether-file-or-directory.png" alt="Output Screenshot">
+		</pre>
+	        <p>The output of the script is displayed in the terminal.</p>
+	        <img class="output-image" src="/home/asta/Desktop/Linux_Training/Bash-scripting/amitkumbhare/new_page/check-whether-file-or-directory.png" alt="Output Screenshot">
 
-	<h2>Explanation:</h2>
-	<ul>
-		<li>The script uses a <code>for</code> loop to iterate over the command-line arguments provided.</li>
-		<li>It checks if the current argument is a file using the <code>-f</code> option with the <code>[[</code> command.</li>
-		<li>If the current argument is a file, it prints a message with the file name and the number of lines in the file using the <code>wc -l</code> command.</li>
-		<li>It then asks the user to enter a line number and prints the first <code>n</code> lines of the file using the <code>head</code> command, where <code>n</code> is the line number entered by the user.</li>
-		<li>If the user enters a line number that is greater than the number of lines in the file, it prints a message saying "Range Exceeded".</li>
-		<li>If the current argument is a directory, it prints a message with the directory name.</li>
-		<li>If the current argument is neither a file nor a directory, it prints a message asking the user to enter a valid file name or directory.</li>
-	</ul>
-        </div>
+		<h2>Explanation:</h2>
+		<ul>
+			<li>The script uses a <code>for</code> loop to iterate over the command-line arguments provided.</li>
+			<li>It checks if the current argument is a file using the <code>-f</code> option with the <code>[[</code> command.</li>
+			<li>If the current argument is a file, it prints a message with the file name and the number of lines in the file using the <code>wc -l</code> command.</li>
+			<li>It then asks the user to enter a line number and prints the first <code>n</code> lines of the file using the <code>head</code> command, where <code>n</code> is the line number entered by the user.</li>
+			<li>If the user enters a line number that is greater than the number of lines in the file, it prints a message saying "Range Exceeded".</li>
+			<li>If the current argument is a directory, it prints a message with the directory name.</li>
+			<li>If the current argument is neither a file nor a directory, it prints a message asking the user to enter a valid file name or directory.</li>
+		</ul>
+	</div>
+
 </body>
 </html>
 

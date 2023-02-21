@@ -48,18 +48,62 @@
                         max-width: 100%;
                         height: auto;
                 }
+                /* Style the menu bar */
+              .menu {
+                        background-color: #333;
+                        color: white;
+                        width: 200px;
+                        height: 100%;
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        padding: 20px;
+              }
+
+              /* Style the menu items */
+              .menu a {
+                      display: block;
+                      color: white;
+                      padding: 10px;
+                      text-decoration: none;
+              }
+
+              /* Style the selected menu item */
+              .menu a.active {
+                      background-color: #4CAF50;
+              }
+
+              /* Style the page content */
+              .content {
+                      margin-left: 200px;
+                      padding: 20px;
+              }
         </style>
 
 </head>
 <body>
         <div class="container">
-		<ul>
-		Checking before sending files to the server.
-		</ul>
-        <img class="output-image" src="2send-multiple-file-in-loop-on-single-sftp-server.png" alt="Output Screenshot">
-        <img class="output-image" src="1send-multiple-file-in-loop-on-single-sftp-server.png" alt="Output Screenshot">
+                <!-- Menu bar -->
+                <div class="menu">
+                        <!--a href="index.html">Home</a-->
+                        <a href="nav-bar.html">Home</a>
+                        <a href="check-whether-file-or-directory.html">Check Whether File or Directory</a>
+                        <a href="copy-data-from-one-file-to-another.html">Copy Data from One File to Another</a>
+                        <a href="find_the_Largest_Number.html">Find the Largest Number</a>
+                        <a href="print-weekday-or-working-day.html">Print Weekday or Working Day</a>
+                        <a href="print_matching_keyword_line.html">Print Matching Keyword Line</a>
+                        <a href="send-multiple-file-in-loop-on-single-sftp-server.html" class="active">Send Multiple File in Loop on Single SFTP Server</a>
+                        <a href="upload-file-using-sftp.html">Upload File Using SFTP</a>
+                </div>
         <h1>Bash Script Example</h1>
-	<p>To send multiple file in loop on single sftp server</p>
+		<ul>
+			Before sending files to the server.
+		</ul>
+		<p><strong>Server Machine: </strong></p>
+        <img class="output-image" src="/home/asta/Desktop/Linux_Training/Bash-scripting/amitkumbhare/2send-multiple-file-in-loop-on-single-sftp-server.png" alt="Output Screenshot">
+	<p><strong>Client Client: </p>
+        <img class="output-image" src="/home/asta/Desktop/Linux_Training/Bash-scripting/amitkumbhare/1send-multiple-file-in-loop-on-single-sftp-server.png" alt="Output Screenshot">
+	<p>To send multiple file in loop on single sftp server</strong></p>
 
 	<h2>Script:</h2>
         <pre>
@@ -91,8 +135,8 @@
 	  <li>The output from the loop is piped into sftp with the appropriate user and host information</li>
 	</ul>
         <p>The output of the script is displayed in the terminal.</p>
-        <img class="output-image" src="3send-multiple-file-in-loop-on-single-sftp-server.png" alt="Output Screenshot">
-        <img class="output-image" src="4send-multiple-file-in-loop-on-single-sftp-server.png" alt="Output Screenshot">
+        <img class="output-image" src="/home/asta/Desktop/Linux_Training/Bash-scripting/amitkumbhare/3send-multiple-file-in-loop-on-single-sftp-server.png" alt="Output Screenshot">
+        <img class="output-image" src="/home/asta/Desktop/Linux_Training/Bash-scripting/amitkumbhare/4send-multiple-file-in-loop-on-single-sftp-server.png" alt="Output Screenshot">
 
         </div>
 </body>
