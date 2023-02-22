@@ -95,6 +95,7 @@
                         <a href="upload-file-using-sftp.html">Upload File Using SFTP</a>
                 </div>
 		<h1>Search Student File</h1>
+                <p>This is a bash script that prompts the user to enter a keyword to search in a file called "student". It then uses the grep command to search for the keyword in the file.</p>
 		<pre>
 			#!/bin/bash
 
@@ -114,10 +115,13 @@
 
 	        <h2>Explanation:</h2>
 		<ul>
-			<li>This script prompts the user to enter a keyword to search in the student file.</li>
-			<li>It then uses the grep command to search for the keyword in the file.</li> 
-			<li>The -q option is used to perform a quiet search (i.e., the command does not output any matching lines). Instead, the if statement checks the exit status of the grep command to determine if a match was found. If a match was found, it prints the matching lines to the console.</li>
-			<li>If no match was found, it prints a message indicating that no match was found.</li>
+
+                        <li>This is a bash script that prompts the user to enter a keyword to search in a file called "student". It then uses the grep command to search for the keyword in the file.</li>
+			<li>The script starts by displaying a prompt asking the user to enter a keyword to search for in the "student" file.</li>
+                        <li>The read command is used to read the user's input and store it in a variable called keyword.</li>
+                        <li>The if statement checks if the grep command with the -q option (which tells grep to be quiet and not output any matching lines) and the $keyword variable as the search pattern returns a zero exit code (indicating that a match was found).</li>
+                        <li>If a match was found, the script outputs a message indicating that the following lines match the keyword, followed by the actual matching lines using the grep command again without the -q option.</li>
+                        <li>If no match was found, the script outputs a message indicating that no match was found for the keyword.</li>
 		</ul>
 	</div>
 
