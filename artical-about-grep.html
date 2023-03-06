@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Using grep with CSV files</title>
+		<style>
+                body {
+                        font-family: Arial, sans-serif;
+                        font-size: 16px;
+                        line-height: 1.5;
+                        color: #333;
+                        margin: 0;
+                        padding: 0;
+                        background-color: #f7f7f7;
+                }
+
+                .container {
+                        max-width: 800px;
+                        margin: 0 auto;
+                        padding: 20px;
+                        background-color: #fff;
+                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                }
+
+                h1 {
+                        font-size: 32px;
+                        margin-bottom: 20px;
+                        text-align: center;
+                        color: #333;
+                }
+
+                p {
+                        margin-bottom: 20px;
+                        line-height: 1.5;
+                }
+
+                pre {
+                        background-color: #f5f5f5;
+                        padding: 10px;
+                        overflow-x: auto;
+                        font-family: "Courier New", monospace;
+                        font-size: 14px;
+                        line-height: 1.2;
+                        color: #333;
+                }
+                .output-image {
+                        display: block;
+                        margin-top: 20px;
+                        max-width: 100%;
+                        height: auto;
+                }
+
+		/* Style the menu bar */
+	      .menu {
+			background-color: #333;
+			color: white;
+			width: 200px;
+			height: 100%;
+			position: fixed;
+			top: 0;
+			left: 0;
+			padding: 20px;
+	      }
+
+	      /* Style the menu items */
+	      .menu a {
+		      display: block;
+		      color: white;
+		      padding: 10px;
+		      text-decoration: none;
+	      }
+
+	      /* Style the selected menu item */
+	      .menu a.active {
+		      background-color: #4CAF50;
+	      }
+
+	      /* Style the page content */
+	      .content {
+		      margin-left: 200px;
+		      padding: 20px;
+	      }
+        </style>
+	</head>
+	<body>
+		<h1>Using grep with CSV files</h1>
+		<p>Grep is a powerful command-line tool that allows users to search for patterns in text files. CSV (Comma-Separated Value) files are a common format for storing and exchanging tabular data. In this article, we will explore some different ways to use the grep command with CSV files as input.</p>
+		<h2>1. Search for a specific string in a CSV file</h2>
+		<p>The simplest use case of grep is to search for a specific string in a CSV file. For example, if we want to search for all occurrences of the word "apple" in a file named "fruits.csv", we can use the following command:</p>
+		<pre>grep 'apple' fruits.csv</pre>
+		<p>This will display all the lines in the file that contain the word "apple".</p>
+		<h2>2. Search for a string in a specific column of a CSV file</h2>
+		<p>Sometimes, we may only be interested in searching for a string in a specific column of a CSV file. In this case, we can use the -F (fixed-string) option of grep along with the -w (word-regexp) option to match only the whole word. We can also use the -o (only-matching) option to display only the matching text.</p>
+		<p>For example, if we want to search for all occurrences of the word "red" in the third column of a file named "colors.csv", we can use the following command:</p>
+		<pre>grep -Fw -o 'red' colors.csv | cut -d ',' -f 3</pre>
+		<p>This will display all the occurrences of the word "red" in the third column of the file.</p>
+		<h2>3. Search for lines that match a specific pattern in a CSV file</h2>
+		<p>In some cases, we may want to search for lines that match a specific pattern in a CSV file. For example, we may want to find all the lines that have a value greater than 100 in the second column of a file named "numbers.csv". We can use the regular expression pattern "[1-9][0-9][0-9]+" to match all numbers greater than 100.</p>
+		<pre>grep -E '^[^,]*,[1-9][0-9][0-9]+.*$' numbers.csv</pre>
+		<p>This will display all the lines in the file that have a value greater than 100 in the second column.</p>
+		<h2>4. Search for lines that do not match a specific pattern in a CSV file</h2>
+		<p>Sometimes, we may want to find all the lines that do not match a specific pattern in a CSV file. For example, we may want to find all the lines in a file named "employees.csv" that do not have an email address. We can use the following command:</p>
+		<pre>grep -v '@' employees.csv</pre>
+		<p>This will display all the lines in the file that do not have an "@" symbol in them, which can be anindication of an email address.</p>
+		<h2>5. Search for lines that match multiple patterns in a CSV file</h2>
+		<p>We can use the grep command to search for lines that match multiple patterns in a CSV file. For example, we may want to find all the lines in a file named "sales.csv" that have a value greater than 500 in the second column and contain the word "product" in the fifth column. We can use the following command:</p>
+		<pre>grep -E '^[^,]*,[5-9][0-9][0-9]+,[^,]*,[^,]*,.*product.*$' sales.csv</pre>
+		<p>This will display all the lines in the file that have a value greater than 500 in the second column and contain the word "product" in the fifth column.</p>
+	</body>
+</html>
+
+
