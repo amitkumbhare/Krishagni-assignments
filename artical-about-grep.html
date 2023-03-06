@@ -107,7 +107,7 @@
 
 			<img class="output-image" src="grep-eg1.png" alt="Output Screenshot">
 
-			<h3>Explainiation</h3>
+			<h3>Explainiation:</h3>
 
 			<p>The command <code>grep 'apple' random.csv</code> is used to search for the word "apple" in the file "random.csv".</p>
 				<ul>
@@ -127,13 +127,13 @@
 
 			<img class="output-image" src="grep-eg2.png" alt="Output Screenshot">
 		
-			<h3>Explainiation</h3>
+			<h3>Explainiation:</h3>
 
 			<ul>
-				<li><code>grep -Fw '20' random.csv:</code>searches for lines in the <strong>random.csv</strong> file that contain the exact word "20" as a whole word (i.e., surrounded by word boundaries).</li>
-				<li><code>|:</code>pipes the output of the grep command to the next command</li>
-				<li><code>cut -d ',' -f 4:</code>selects the fourth field of each line, using comma (,) as the field delimiter.</li>
-				<li>this command searches for lines in the random.csv file that contain the word "20", and then extracts the fourth field (column) of each matching line.</li>
+				<li><code>grep -Fw '20' random.csv</code>: searches for lines in the <strong>random.csv</strong> file that contain the exact word "20" as a whole word (i.e., surrounded by word boundaries).</li>
+				<li><code>|</code>: pipes the output of the grep command to the next command</li>
+				<li><code>cut -d ',' -f 4</code>: selects the fourth field of each line, using comma (,) as the field delimiter.</li>
+				<li>This command searches for lines in the random.csv file that contain the word "20", and then extracts the fourth field (column) of each matching line.</li>
 				
 			</ul>
 		
@@ -145,17 +145,17 @@
 
 			<img class="output-image" src="grep-eg3.png" alt="Output Screenshot">
 
-			<h3>Explainiation</h3>
+			<h3>Explainiation:</h3>
 
 			<ul>
-				<li><code>grep:</code> This is the command to search for text patterns in files.</li>
-				<li><code>-E:</code> This option tells grep to use extended regular expressions for matching patterns.</li>
-				<li><code>"^[^,]*,p":</code> This is the regular expression pattern to search for.</li>
-				<li><code>^:</code> Matches the start of a line.</li>
-				<li><code>[^,]*:</code> Matches any sequence of characters that does not contain a comma.</li>
-				<li><code>,:</code> Matches a comma.</li>
-				<li><code>p:</code> Matches the letter "p".</li>
-				<li><code>random.csv:</code> This is the name of the file to search in.</li>
+				<li><code>grep</code>: This is the command to search for text patterns in files.</li>
+				<li><code>-E</code>: This option tells grep to use extended regular expressions for matching patterns.</li>
+				<li><code>"^[^,]*,p"</code>: This is the regular expression pattern to search for.</li>
+				<li><code>^</code>: Matches the start of a line.</li>
+				<li><code>[^,]*</code>: Matches any sequence of characters that does not contain a comma.</li>
+				<li><code>,</code>: Matches a comma.</li>
+				<li><code>p</code>: Matches the letter "p".</li>
+				<li><code>random.csv</code>: This is the name of the file to search in.</li>
 			</ul>
 		
 			<p>So, the command will match any lines in "random.csv" that begin with a string that does not contain a comma, followed by a comma, followed by the letter "p".</p>
@@ -170,7 +170,7 @@
 
 			<img class="output-image" src="grep-eg4.png" alt="Output Screenshot">
 
-			<h3>Explainiation</h3>
+			<h3>Explainiation:</h3>
 
 			<ul>
 				<li><code>grep</code>: is a command-line utility in Unix-based operating systems that searches for patterns within files.</li>
@@ -189,18 +189,18 @@
 
 			<img class="output-image" src="grep-eg5.png" alt="Output Screenshot">
 			
-			<h3>Explainiation</h3>
+			<h3>Explainiation:</h3>
 				<p>So, the command will search for lines in the "random2.csv" file that meet the following criteria:</p>
 				<ul>
-					<li><code>grep:</code> Command to search for a pattern in a file</li>
-					<li><code>-E:</code> Option to enable extended regular expression syntax.</li>
-					<li><code>^[^,]*,[5-9][0-9][0-9]+,[^,]*,[^,]*,.*.*$:</code>Option to enable extended regular expression syntax.</li>
-					<li><code>^:</code>Start of the line</li>
-					<li><code>[^,]*,:</code>Zero or more characters that are not commas followed by a comma</li>
-					<li><code>[5-9][0-9][0-9]+,:</code>A number between 500 and 999 followed by a comma</li>
-					<li><code>[^,]*,[^,]*,:</code>Zero or more characters that are not commas followed by a comma, twice</li>
-					<li><code>.*.*: </code>Zero or more characters of any type</li>
-					<li><code>$:</code>End of the line</li>
+					<li><code>grep</code>: Command to search for a pattern in a file</li>
+					<li><code>-E</code>: Option to enable extended regular expression syntax.</li>
+					<li><code>^[^,]*,[5-9][0-9][0-9]+,[^,]*,[^,]*,.*.*$</code>: Option to enable extended regular expression syntax.</li>
+					<li><code>^</code>: Start of the line</li>
+					<li><code>[^,]*,</code>: Zero or more characters that are not commas followed by a comma</li>
+					<li><code>[5-9][0-9][0-9]+,</code>: A number between 500 and 999 followed by a comma</li>
+					<li><code>[^,]*,[^,]*,</code>: Zero or more characters that are not commas followed by a comma, twice</li>
+					<li><code>.*.* </code>: Zero or more characters of any type</li>
+					<li><code>$</code>: End of the line</li>
 				</ul>
 
 				
