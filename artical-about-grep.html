@@ -99,28 +99,100 @@
 			</div>
 		<h1>Using grep with CSV files</h1>
 
-		<p>Grep is a powerful command-line tool that allows users to search for patterns in text files. CSV (Comma-Separated Value) files are a common format for storing and exchanging tabular data. In this article, we will explore some different ways to use the grep command with CSV files as input.</p>
+			<p>Grep is a powerful command-line tool that allows users to search for patterns in text files. CSV (Comma-Separated Value) files are a common format for storing and exchanging tabular data. In this article, we will explore some different ways to use the grep command with CSV files as input.</p>
+
 		<h2>1. Search for a specific string in a CSV file</h2>
-		<p>The simplest use case of grep is to search for a specific string in a CSV file. For example, if we want to search for all occurrences of the word "apple" in a file named "fruits.csv", we can use the following command:</p>
-		<pre>grep 'apple' fruits.csv</pre>
-		<p>This will display all the lines in the file that contain the word "apple".</p>
+			<p>The simplest use case of grep is to search for a specific string in a CSV file. For example, if we want to search for all occurrences of the word "apple" in a file named "random.csv", we can use the following command:</p>
+			<pre>grep 'apple' random.csv</pre>
+
+			<img class="output-image" src="grep-eg1.png" alt="Output Screenshot">
+
+			<h3>Explainiation</h3>
+
+			<p>The command <code>grep 'apple' random.csv</code> is used to search for the word "apple" in the file "random.csv".
+				Here is an explanation of the command:
+					<ol>grep is a command-line utility in Linux used for searching text in files or input streams.</ol>
+					<ol>'apple' is the search pattern that we want to look for in the file.</ol>
+					<ol>random.csv is the file that we want to search in.</ol>
+				</p>
+
+			<p>This will display all the lines in the file that contain the word "apple".</p>
+		
 		<h2>2. Search for a string in a specific column of a CSV file</h2>
-		<p>Sometimes, we may only be interested in searching for a string in a specific column of a CSV file. In this case, we can use the -F (fixed-string) option of grep along with the -w (word-regexp) option to match only the whole word. We can also use the -o (only-matching) option to display only the matching text.</p>
-		<p>For example, if we want to search for all occurrences of the word "red" in the third column of a file named "colors.csv", we can use the following command:</p>
-		<pre>grep -Fw -o 'red' colors.csv | cut -d ',' -f 3</pre>
-		<p>This will display all the occurrences of the word "red" in the third column of the file.</p>
-		<h2>3. Search for lines that match a specific pattern in a CSV file</h2>
-		<p>In some cases, we may want to search for lines that match a specific pattern in a CSV file. For example, we may want to find all the lines that have a value greater than 100 in the second column of a file named "numbers.csv". We can use the regular expression pattern "[1-9][0-9][0-9]+" to match all numbers greater than 100.</p>
-		<pre>grep -E '^[^,]*,[1-9][0-9][0-9]+.*$' numbers.csv</pre>
-		<p>This will display all the lines in the file that have a value greater than 100 in the second column.</p>
+		
+			<p>Sometimes, we may only be interested in searching for a string in a specific column of a CSV file. In this case, we can use the -F (fixed-string) option of grep along with the -w (word-regexp) option to match only the whole word. We can also use the -o (only-matching) option to display only the matching text.</p>
+			<p>For example, if we want to search for all occurrences of the word "red" in the third column of a file named "random.csv", we can use the following command:</p>
+		
+			<pre>grep -Fw 'red' random.csv | cut -d ',' -f 3</pre>
+
+			<img class="output-image" src="grep-eg2.png" alt="Output Screenshot">
+		
+			<h3>Explainiation</h3>
+		
+			<p><strong>grep -Fw -o 'red' random.csv</strong>: This command searches for the exact word "red" in the file random.csv. The -F option is used to treat the search pattern as a fixed string rather than a regular expression, and the -w option is used to match the word "red" exactly, without matching other words that contain "red".
+			The -o option is used to print only the matching text ("red") rather than the entire line.<code>cut -d ',' -f 3</code>: This command uses the cut utility to extract the third field from each line of output. The -d ',' option specifies that the field separator is a comma, and the -f 3 option specifies that we want to extract the third field.
+			</p>
+			<p>This will display all the occurrences of the word "red" in the third column of the file.</p>
+		
+		<h2>3. Searching for records that match a specific pattern:</h2>
+		
+			<p>We can also use grep to search for records that match a specific pattern. For example, if we want to search for all records where the second column starts with the letter "r", we can use the following command:</p>
+		
+			<pre>grep -E "^[^,]*,p" random.csv</pre>
+
+			<img class="output-image" src="grep-eg3.png" alt="Output Screenshot">
+
+			<h3>Explainiation</h3>
+
+			<p>
+				<ol><code>grep:</code> This is the command to search for text patterns in files.</ol>
+				<ol><code>-E:</code> This option tells grep to use extended regular expressions for matching patterns.</ol>
+				<ol><code>"^[^,]*,p":</code> This is the regular expression pattern to search for.</ol>
+				<ol><code>^:</code> Matches the start of a line.</ol>
+				<ol><code>[^,]*:</code> Matches any sequence of characters that does not contain a comma.</ol>
+				<ol><code>,:</code> Matches a comma.</ol>
+				<ol><code>p:</code> Matches the letter "p".</ol>
+				<ol><code>random.csv:</code> This is the name of the file to search in.</ol>
+			</p>
+		
+			<p>So, the command will match any lines in "random.csv" that begin with a string that does not contain a comma, followed by a comma, followed by the letter "p".</p>
+		
 		<h2>4. Search for lines that do not match a specific pattern in a CSV file</h2>
-		<p>Sometimes, we may want to find all the lines that do not match a specific pattern in a CSV file. For example, we may want to find all the lines in a file named "employees.csv" that do not have an email address. We can use the following command:</p>
-		<pre>grep -v '@' employees.csv</pre>
-		<p>This will display all the lines in the file that do not have an "@" symbol in them, which can be anindication of an email address.</p>
+		
+			<p>Sometimes, we may want to find all the lines that do not match a specific pattern in a CSV file. For example, we may want to find all the lines in a file named "random.csv" that do not have an email address. We can use the following command:</p>
+		
+			<pre>grep -v '@' random.csv</pre>
+
+			<img class="output-image" src="grep-eg4.png" alt="Output Screenshot">
+
+			<h3>Explainiation</h3>
+
+			<p></p>
+			
+			<p>This will display all the lines in the file that do not have an "@" symbol in them, which can be anindication of an email address.</p>
+		
 		<h2>5. Search for lines that match multiple patterns in a CSV file</h2>
-		<p>We can use the grep command to search for lines that match multiple patterns in a CSV file. For example, we may want to find all the lines in a file named "sales.csv" that have a value greater than 500 in the second column and contain the word "product" in the fifth column. We can use the following command:</p>
-		<pre>grep -E '^[^,]*,[5-9][0-9][0-9]+,[^,]*,[^,]*,.*product.*$' sales.csv</pre>
-		<p>This will display all the lines in the file that have a value greater than 500 in the second column and contain the word "product" in the fifth column.</p>
+		
+			<p>So, the command will match any line that starts with a string of characters that does not contain a comma, followed by a number in the range of 500-999, followed by two strings of characters that do not contain commas, and ending with any number of any characters.</p>
+			<h3>Explainiation</h3>
+				<p>So, the command will search for lines in the "random2.csv" file that meet the following criteria:</p>
+				<ul>
+					<li><code>grep:</code> Command to search for a pattern in a file</li>
+					<li><code>-E:</code> Option to enable extended regular expression syntax.</li>
+					<li><code>^[^,]*,[5-9][0-9][0-9]+,[^,]*,[^,]*,.*.*$:</code>Option to enable extended regular expression syntax.</li>
+					<li><code>^:</code>Start of the line</li>
+					<li><code>[^,]*,:</code>Zero or more characters that are not commas followed by a comma</li>
+					<li><code>[5-9][0-9][0-9]+,:</code>A number between 500 and 999 followed by a comma</li>
+					<li><code>[^,]*,[^,]*,:</code>Zero or more characters that are not commas followed by a comma, twice</li>
+					<li><code>.*.*: </code>Zero or more characters of any type</li>
+					<li><code>$:</code>End of the line</li>
+				</ul>
+				
+				<pre>grep -E '^[^,]*,[5-9][0-9][0-9]+,[^,]*,[^,]*,.*.*$' random2.csv</pre>
+
+				<img class="output-image" src="grep-eg5.png" alt="Output Screenshot">
+				
+			<p>This will display all the lines in the file that have a value greater than 500 in the second column.</p>
 		</div>
 
 	</body>
