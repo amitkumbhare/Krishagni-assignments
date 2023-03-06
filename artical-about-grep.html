@@ -83,7 +83,22 @@
         </style>
 	</head>
 	<body>
+        <div class="container">
+			<!-- Menu bar -->
+			<div class="menu">
+				<!--a href="index.html">Home</a-->
+				<a href="index.html">Home</a>
+				<a href="artical-about-grep.html" class="active">Article</a>
+				<!--<a href="check-whether-file-or-directory.html" >Check Whether File or Directory</a>
+				<a href="copy-data-from-one-file-to-another.html">Copy Data from One File to Another</a>
+				<a href="find_the_Largest_Number.html">Find the Largest Number</a>
+				<a href="print-weekday-or-working-day.html">Print Weekday or Working Day</a>
+				<a href="print_matching_keyword_line.html">Print Matching Keyword Line</a>
+				<a href="send-multiple-file-in-loop-on-single-sftp-server.html">Send Multiple File in Loop on Single SFTP Server</a>
+				<a href="upload-file-using-sftp.html">Upload File Using SFTP</a> -->
+			</div>
 		<h1>Using grep with CSV files</h1>
+
 		<p>Grep is a powerful command-line tool that allows users to search for patterns in text files. CSV (Comma-Separated Value) files are a common format for storing and exchanging tabular data. In this article, we will explore some different ways to use the grep command with CSV files as input.</p>
 		<h2>1. Search for a specific string in a CSV file</h2>
 		<p>The simplest use case of grep is to search for a specific string in a CSV file. For example, if we want to search for all occurrences of the word "apple" in a file named "fruits.csv", we can use the following command:</p>
@@ -106,6 +121,8 @@
 		<p>We can use the grep command to search for lines that match multiple patterns in a CSV file. For example, we may want to find all the lines in a file named "sales.csv" that have a value greater than 500 in the second column and contain the word "product" in the fifth column. We can use the following command:</p>
 		<pre>grep -E '^[^,]*,[5-9][0-9][0-9]+,[^,]*,[^,]*,.*product.*$' sales.csv</pre>
 		<p>This will display all the lines in the file that have a value greater than 500 in the second column and contain the word "product" in the fifth column.</p>
+		</div>
+
 	</body>
 </html>
 
