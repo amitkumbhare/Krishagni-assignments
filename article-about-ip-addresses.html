@@ -1,190 +1,216 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
-	<head>
-		<title>Bash Script</title>
-		<style>
-	                body {
-	                        font-family: Arial, sans-serif;
-	                        font-size: 16px;
-	                        line-height: 1.5;
-	                        color: #333;
-	                        margin: 0;
-	                        padding: 0;
-	                        background-color: #f7f7f7;
-	                }
 
-	                .container {
-	                        max-width: 800px;
-	                        margin: 0 auto;
-	                        padding: 20px;
-	                        background-color: #fff;
-	                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	                }
+<head>
+	<title>Bash Script</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			font-size: 16px;
+			line-height: 1.5;
+			color: #333;
+			margin: 0;
+			padding: 0;
+			background-color: #f7f7f7;
+		}
 
-	                h1 {
-	                        font-size: 32px;
-	                        margin-bottom: 20px;
-	                        text-align: center;
-	                        color: #333;
-	                }
+		.container {
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 20px;
+			background-color: #fff;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		}
 
-	                p {
-	                        margin-bottom: 20px;
-	                        line-height: 1.5;
-	                }
+		h1 {
+			font-size: 32px;
+			margin-bottom: 20px;
+			text-align: center;
+			color: #333;
+		}
 
-	                pre {
-	                        background-color: #f5f5f5;
-	                        padding: 10px;
-	                        overflow-x: auto;
-	                        font-family: "Courier New", monospace;
-	                        font-size: 14px;
-	                        line-height: 1.2;
-	                        color: #333;
-	                }
-	                .output-image {
-	                        display: block;
-	                        margin-top: 20px;
-	                        max-width: 100%;
-	                        height: auto;
-	                }
-		
-			/* Style the menu bar */
-		      .menu {
-				background-color: #333;
-				color: white;
-				width: 200px;
-				height: 100%;
-				position: fixed;
-				top: 0;
-				left: 0;
-				padding: 20px;
-		      }
-	      
-		      /* Style the menu items */
-		      .menu a {
-			      display: block;
-			      color: white;
-			      padding: 10px;
-			      text-decoration: none;
-		      }
+		p {
+			margin-bottom: 20px;
+			line-height: 1.5;
+		}
 
-		      /* Style the selected menu item */
-		      .menu a.active {
-			      background-color: #4CAF50;
-		      }
+		pre {
+			background-color: #f5f5f5;
+			padding: 10px;
+			overflow-x: auto;
+			font-family: "Courier New", monospace;
+			font-size: 14px;
+			line-height: 1.2;
+			color: #333;
+		}
 
-		      /* Style the page content */
-		      .content {
-			      margin-left: 200px;
-			      padding: 20px;
-		      }
+		.output-image {
+			display: block;
+			margin-top: 20px;
+			max-width: 100%;
+			height: auto;
+		}
 
-		      /* Adding CSS to the table */
-		      table {
-			      border-collapse: collapse;
-			      width: 100%;
-			      padding: 10px;
-		      }
+		/* Style the menu bar */
+		.menu {
+			background-color: #333;
+			color: white;
+			width: 200px;
+			height: 100%;
+			position: fixed;
+			top: 0;
+			left: 0;
+			padding: 20px;
+		}
 
-		      th, td {
-			      text-align: left;
-			      padding: 8px;
-			      border: 1px solid black;
-		      }
+		/* Style the menu items */
+		.menu a {
+			display: block;
+			color: white;
+			padding: 10px;
+			text-decoration: none;
+		}
 
-		      th {
-			      background-color: #f2f2f2;
-		      }
+		/* Style the selected menu item */
+		.menu a.active {
+			background-color: #4CAF50;
+		}
 
-	        </style>
-	</head>
-	<body>
-	        <div class="container">
-			<!-- Menu bar -->
-			<div class="menu">
-                        <!--a href="index.html">Home</a-->
-                        <a href="artical-about-grep.html">Article On GREP with CSV File</a>
-                        <a href="article-about-ip-addresses.html">Article About IP Addresses</a>
-                        <!--a href="copy-data-from-one-file-to-another.html">Copy Data from One File to Another</a>
+		/* Style the page content */
+		.content {
+			margin-left: 200px;
+			padding: 20px;
+		}
+
+		/* Adding CSS to the table */
+		table {
+			border-collapse: collapse;
+			width: 100%;
+			padding: 10px;
+		}
+
+		th,
+		td {
+			text-align: left;
+			padding: 8px;
+			border: 1px solid black;
+		}
+
+		th {
+			background-color: #f2f2f2;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<!-- Menu bar -->
+		<div class="menu">
+			<!--a href="index.html">Home</a-->
+			<a href="article-about-grep.html">Article On GREP with CSV File</a>
+			<a href="article-about-ip-addresses.html">Article About IP Addresses</a>
+			<!--a href="copy-data-from-one-file-to-another.html">Copy Data from One File to Another</a>
                         <a href="find_the_Largest_Number.html" class="active">Find the Largest Number</a>
                         <a href="print-weekday-or-working-day.html">Print Weekday or Working Day</a>
                         <a href="print_matching_keyword_line.html">Print Matching Keyword Line</a>
                         <a href="send-multiple-file-in-loop-on-single-sftp-server.html">Send Multiple File in Loop on Single SFTP Server</a>
                         <a href="upload-file-using-sftp.html">Upload File Using SFTP</a-->
-                </div>
-			</div>
-			<h1>IPv4 and IPv6 Networking</h1>
-			<h3>Introduction</h3>
-				<p>The Internet Protocol (IP) is the primary communication protocol used for sending and receiving data packets over the internet. IP addresses are used to identify devices connected to the internet, and there are two types of IP addresses: IPv4 and IPv6. In this article, we will provide an overview of IPv4 and IPv6 addresses, explain the differences between the two, and discuss their advantages and disadvantages.</p>
-			<ul>
-				<h3>IPv4 Addresses</h3>
-				<li>IPv4 (Internet Protocol version 4) is the most widely used IP addressing scheme.</li>
-				<li>It uses a 32-bit address space, which means that there are approximately 4.3 billion unique IPv4 addresses available.</li>
-				<li>Each IPv4 address is represented in decimal notation with four decimal numbers separated by dots, <code>for example, 192.168.1.1</code>.</li>
-				<li>IPv4 addresses are divided into two parts: network and host.</li>
-				<li>The network part identifies the network to which the device belongs, while the host part identifies the device on the network.</li>
-				<li>The subnet mask is used to divide the IP address into the network and host parts.</li>
-				<li>For example, <code>a subnet mask of 255.255.255.0</code> means that the first three decimal numbers represent the network part, and the last decimal number represents the host part.</li>
-				<li>IPv4 addresses are hierarchical and organized into classes.</li>
-				<li>There are five classes of IPv4 addresses, which are identified by the first decimal number.</li>
-				<li>Class A addresses start with 1 to 126, class B addresses start with 128 to 191, class C addresses start with 192 to 223, class D addresses start with 224 to 239, and class E addresses start with 240 to 255.</li>
-				<h3>IPv6 Addresses</h3>
-				<li>IPv6 (Internet Protocol version 6) is the successor to IPv4 and is designed to solve the problem of IPv4 address exhaustion.</li>
-				<li>IPv6 uses a 128-bit address space, which means that there are approximately 3.4×10^38 unique IPv6 addresses available.</li>
-				<li>Each IPv6 address is represented in hexadecimal notation with eight groups of four hexadecimal digits separated by colons, <code>For example, 2001:0db8:85a3:0000:0000:8a2e:0370:7334.</code></li>
-				<li>IPv6 addresses are divided into two parts: network and interface.</li>
-				<li>The network part identifies the network to which the device belongs, while the interface part identifies the device on the network.</li>
-				<li>The subnet mask is not used in IPv6, as the address is self-identifying.</li>
-			</ul>
-			<h3>Advantages and Disadvantages of IPv4 and IPv6</h3>
-			<ul>
-				<li>IPv4 is the most widely used IP addressing scheme and is still used by many devices today.</li>
-				<li>However, it has limitations due to the limited address space, which has led to address exhaustion.</li>
-				<li>IPv6 was designed to solve this problem and has a much larger address space, which means that there will be enough addresses for all devices for the foreseeable future.</li>
-				<br>
-				<li>IPv6 also offers other advantages over IPv4, including improved security, auto-configuration, and better support for mobile devices.</li>
-				<li>However, IPv6 adoption has been slow due to the need for infrastructure changes and the need for devices to support IPv6.</li>
-			</ul>
-
-			<h2>Difference between MAC, IPv4 and IPv6 addresses</h2>
-			<p>MAC addresses, IPv4 addresses, and IPv6 addresses are all different types of addresses used in computer networking. Here are some key differences between these address types:</p>
-			<table>
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Format</th>
-						<th>Scope</th>
-						<th>Uniqueness</th>
-						<th>Compatibility</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td><strong>MAC:</strong></td>
-						<td>MAC addresses are 48-bit addresses represented in hexadecimal format.</td>
-						<td>MAC addresses are used to identify devices on a local network, such as a LAN.</td>
-						<td>MAC addresses are unique to each network interface controller (NIC) and are assigned by the manufacturer.</td>
-						<td>MAC addresses are not routable and cannot be used to communicate outside of the local network.</td>
-					</tr>
-					<tr>
-						<td><strong>IPv4:</strong></td>
-						<td>While IPv4 addresses are 32-bit addresses represented in decimal format.</td>
-						<td>IPv4 and IPv6 addresses are used to identify devices on the Internet, as well as on local networks.</td>
-						<td>IPv4 addresses are assigned by Internet service providers (ISPs) or network administrators, and there is a limited number of unique IPv4 addresses available.</td>
-						<td>IPv4 addresses are routable and can be used to communicate across the Internet, but they are limited in number and are being phased out in favor of IPv6 addresses.</td>
-					</tr>
-	
-					<tr>
-						<td><strong>IPv6</strong></td>
-						<td>IPv6 addresses, on the other hand, are 128-bit addresses represented in hexadecimal format.<td>
-						<td>IPv6 addresses are also assigned by ISPs or network administrators, but there is a much larger pool of unique IPv6 addresses available.</td>
-						<td>IPv6 addresses are the future of Internet addressing and are designed to replace IPv4 addresses, but there are still some compatibility issues that need to be addressed.</td>
-					</tr>
-				</tbody>
-			</table>
 		</div>
-	</body>
+		<h1>IPv4 and IPv6 Networking</h1>
+		<h3>Introduction</h3>
+		<p>The Internet Protocol (IP) is the primary communication protocol used for sending and receiving data packets
+			over the internet. IP addresses are used to identify devices connected to the internet, and there are two
+			types of IP addresses: IPv4 and IPv6. In this article, we will provide an overview of IPv4 and IPv6
+			addresses, explain the differences between the two, and discuss their advantages and disadvantages.</p>
+		<ul>
+			<h3>IPv4 Addresses</h3>
+			<li>IPv4 (Internet Protocol version 4) is the most widely used IP addressing scheme.</li>
+			<li>It uses a 32-bit address space, which means that there are approximately 4.3 billion unique IPv4
+				addresses available.</li>
+			<li>Each IPv4 address is represented in decimal notation with four decimal numbers separated by dots,
+				<code>for example, 192.168.1.1</code>.</li>
+			<li>IPv4 addresses are divided into two parts: network and host.</li>
+			<li>The network part identifies the network to which the device belongs, while the host part identifies the
+				device on the network.</li>
+			<li>The subnet mask is used to divide the IP address into the network and host parts.</li>
+			<li>For example, <code>a subnet mask of 255.255.255.0</code> means that the first three decimal numbers
+				represent the network part, and the last decimal number represents the host part.</li>
+			<li>IPv4 addresses are hierarchical and organized into classes.</li>
+			<li>There are five classes of IPv4 addresses, which are identified by the first decimal number.</li>
+			<li>Class A addresses start with 1 to 126, class B addresses start with 128 to 191, class C addresses start
+				with 192 to 223, class D addresses start with 224 to 239, and class E addresses start with 240 to 255.
+			</li>
+			<h3>IPv6 Addresses</h3>
+			<li>IPv6 (Internet Protocol version 6) is the successor to IPv4 and is designed to solve the problem of IPv4
+				address exhaustion.</li>
+			<li>IPv6 uses a 128-bit address space, which means that there are approximately 3.4×10^38 unique IPv6
+				addresses available.</li>
+			<li>Each IPv6 address is represented in hexadecimal notation with eight groups of four hexadecimal digits
+				separated by colons, <code>For example, 2001:0db8:85a3:0000:0000:8a2e:0370:7334.</code></li>
+			<li>IPv6 addresses are divided into two parts: network and interface.</li>
+			<li>The network part identifies the network to which the device belongs, while the interface part identifies
+				the device on the network.</li>
+			<li>The subnet mask is not used in IPv6, as the address is self-identifying.</li>
+		</ul>
+		<h3>Advantages and Disadvantages of IPv4 and IPv6</h3>
+		<ul>
+			<li>IPv4 is the most widely used IP addressing scheme and is still used by many devices today.</li>
+			<li>However, it has limitations due to the limited address space, which has led to address exhaustion.</li>
+			<li>IPv6 was designed to solve this problem and has a much larger address space, which means that there will
+				be enough addresses for all devices for the foreseeable future.</li>
+			<br>
+			<li>IPv6 also offers other advantages over IPv4, including improved security, auto-configuration, and better
+				support for mobile devices.</li>
+			<li>However, IPv6 adoption has been slow due to the need for infrastructure changes and the need for devices
+				to support IPv6.</li>
+		</ul>
+
+		<h2>Difference between MAC, IPv4 and IPv6 addresses</h2>
+		<p>MAC addresses, IPv4 addresses, and IPv6 addresses are all different types of addresses used in computer
+			networking. Here are some key differences between these address types:</p>
+		<table>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Format</th>
+					<th>Scope</th>
+					<th>Uniqueness</th>
+					<th>Compatibility</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><strong>MAC:</strong></td>
+					<td>MAC addresses are 48-bit addresses represented in hexadecimal format.</td>
+					<td>MAC addresses are used to identify devices on a local network, such as a LAN.</td>
+					<td>MAC addresses are unique to each network interface controller (NIC) and are assigned by the
+						manufacturer.</td>
+					<td>MAC addresses are not routable and cannot be used to communicate outside of the local network.
+					</td>
+				</tr>
+				<tr>
+					<td><strong>IPv4:</strong></td>
+					<td>While IPv4 addresses are 32-bit addresses represented in decimal format.</td>
+					<td>IPv4 and IPv6 addresses are used to identify devices on the Internet, as well as on local
+						networks.</td>
+					<td>IPv4 addresses are assigned by Internet service providers (ISPs) or network administrators, and
+						there is a limited number of unique IPv4 addresses available.</td>
+					<td>IPv4 addresses are routable and can be used to communicate across the Internet, but they are
+						limited in number and are being phased out in favor of IPv6 addresses.</td>
+				</tr>
+
+				<tr>
+					<td><strong>IPv6</strong></td>
+					<td>IPv6 addresses, on the other hand, are 128-bit addresses represented in hexadecimal format.
+					<td>
+					<td>IPv6 addresses are also assigned by ISPs or network administrators, but there is a much larger
+						pool of unique IPv6 addresses available.</td>
+					<td>IPv6 addresses are the future of Internet addressing and are designed to replace IPv4 addresses,
+						but there are still some compatibility issues that need to be addressed.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+
 </html>
-
-
