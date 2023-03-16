@@ -206,6 +206,29 @@
 
 				
 			<p>This will display all the lines in the file that have a value greater than 500 in the second column.</p>
+
+
+		<h3>Now for the Advance options with the grep commad.</h3>
+
+		<h2>1. Searching for lines containing a specific pattern in a directory recursively</h2>
+				<p>This command will search for all files in the given directory and its subdirectories for lines containing the specified pattern.</p>
+
+				<pre>grep -r 'Home' amitkumbhare/</pre>
+
+				<img class="output-image" src="grep-dir-eg1.png" alt="Output Screenshot">
+				
+				<h3>Explainiation:</h3>
+				<ul>
+					<li><code>grep</code>: Command to search for a pattern in a file</li>
+					<li><code>-r</code> option specifies to search for the pattern recursively in all subdirectories within the specified directory.
+					<li><code>'Home'</code> is the text string or pattern that is being searched for.</li>
+					<li><code>amitkumbhare/</code> is the directory in which the search should be performed.</li>
+				</ul>
+
+		<h2>2. Searching for lines containing a pattern with a specific context</h2>
+				<p>This command will search for all lines in the file.txt that contain the specified pattern and also display 3 lines of context before and after the matched line.</p>
+
+				<pre>grep -C 3 'pattern' file.txt</pre>
 		</div>
 
 	</body>
