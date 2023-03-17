@@ -268,6 +268,45 @@
 
 				<h3>Explainiation:</h3>
 				<p>The command <code>zgrep 'Menu' nav-bar.html.gz</code> is used to search for the pattern <strong>'Menu'</strong> in a compressed file called <strong>nav-bar.html.gz</strong> using the zgrep command.</p>
+				<ul>
+					<li><code>`zgrep`</code> is a command-line utility that searches for a specified pattern or text string in one or more compressed files without needing to first uncompress them.</li>
+					<li><code>`'Menu'`</code> is the pattern that is being searched for.</li>
+					<li><code>`nav-bar.html.gz`</code> is the compressed file in which the search should be performed.</li>
+				</ul>
+
+		<h2>5. Search for lines containing a specific pattern and exclude specific files or directories:</h2>
+				<p>This command recursively searches for lines containing "pattern" in the specified directory, while excluding files or directories specified in the --exclude and --exclude-dir options.</p>
+
+				<pre>grep -r --exclude-dir={Amit,DIR1} --exclude={student,walk} "amit" /home/asta/Desktop/Linux_Training/Bash-scripting/</pre>
+				
+				<img class="output-image" src="grep-dir-eg3.png" alt="Output Screenshot">
+
+				<h3>Explainiation:</h3>
+				<p>This command searches for the string "amit" recursively in the directory /home/asta/Desktop/Linux_Training/Bash-scripting while excluding any files or directories named "student" or "walk". Additionally, it also excludes any directories named "Amit" or "DIR1".</p>
+				<ul>
+					<li><code>`grep`</code>: Command for searching for patterns in files or directories.</li>
+					<li><code>`-r`</code>: Recursive search.</li>
+					<li><code>`--exclude-dir={Amit,DIR1}`</code>: Excludes directories named "Amit" or "DIR1" from the search.</li>
+					<li><code>`--exclude={student,walk}`</code>: Excludes files named "student" or "walk" from the search.</li>
+					<li><code>`"amit"`</code>: The string to search for.</li>
+					<li><code>`/home/asta/Desktop/Linux_Training/Bash-scripting/`</code>:  The directory to search in.</li>
+					
+				</ul>
+
+		<h2>6. OPTIONS CAN BE USED WITH GREP COMMAND:</h2>
+				
+				<ul>
+					<li><code>`-i`</code>: Ignore case distinctions in both the `grep` command and the file being searched.</li>
+					<li><code>`-v`</code>: Inverse the sense of matching, to select non-matching lines.</li>
+					<li><code>`-w`</code>: Match only whole words.</li>
+					<li><code>`-n`</code>: Display line numbers in front of matching lines.</li>
+					<li><code>`-r`</code>: Recursively search subdirectories listed.</li>
+					<li><code>`-l`</code>: Display only the names of files that contain matching lines.</li>
+					<li><code>`-c`</code>: Display only the count of lines that contain matches.</li>
+					<li><code>`-o`</code>: Display only the matching parts of the lines, rather than the entire line.</li>
+					<li><code>`-E`</code>: Use extended regular expressions.</li>
+					<li><code>`-F`</code>: Interpret the pattern as a fixed string, not a regular expression.</li>
+				</ul>
 
 		</div>
 
