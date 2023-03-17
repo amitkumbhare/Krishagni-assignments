@@ -228,7 +228,47 @@
 		<h2>2. Searching for lines containing a pattern with a specific context</h2>
 				<p>This command will search for all lines in the file.txt that contain the specified pattern and also display 3 lines of context before and after the matched line.</p>
 
-				<pre>grep -C 3 'pattern' file.txt</pre>
+				<pre>grep -C 3 'Menu' amitkumbhare/new_page/article-about-grep.html</pre>
+
+				<img class="output-image" src="grep-dir-eg2.png" alt="Output Screenshot">
+
+				<h3>Explainiation:</h3>
+				<p>The command <code>grep -C 3 'Menu' amitkumbhare/new_page/article-about-grep.html</code> is used to search for the pattern <strong>'Menu'</strong> in the file <strong>'article-about-grep.html'</strong> and display the three lines before and after each occurrence of the pattern.</p>
+				<ul>
+					<li><code>`grep`</code> is a command-line utility that searches for a specified pattern or text string in one or more files.</li>
+					<li><code>`-C 3`</code> option specifies to display 3 lines before and after each occurrence of the pattern in the file.</li>
+					<li><code>`Menu`</code> is the pattern that is being searched for.</li>
+					<li><code>`amitkumbhare/new_page/article-about-grep.html`</code> is the file in which the search should be performed.</li>
+					
+				</ul>
+
+		<h2>3. Searching for lines containing a pattern with line numbers:</h2>
+				<p>This command will search for all lines in the <strong>article-about-grep.html</strong> that contain the specified pattern and display the line numbers along with the matched lines.</p>
+
+				<pre>grep -n 'Home' article-about-grep.html</pre>
+
+				<img class="output-image" src="grep-dir-eg3.png" alt="Output Screenshot">
+
+				<h3>Explainiation:</h3>
+				<p>The command <strong>grep -n 'Home' article-about-grep.html</strong> is used to search for the pattern <code>'Home'</code> in the file <code>'article-about-grep.html'</code> and display the line number(s) where the pattern is found.</p>
+				<ul>
+					<li><code>`grep`</code> is a command-line utility that searches for a specified pattern or text string in one or more files.</li>
+					<li><code>`-n`</code> option specifies to display the line number(s) where the pattern is found.</li>
+					<li><code>`'Home'`</code> is the pattern that is being searched for.</li>
+					<li><code>`article-about-grep.html`</code> is the file in which the search should be performed.</li>
+
+				</ul>
+
+		<h2>4. Searching for lines containing a pattern in compressed files:</h2>
+				<p>This command will search for all lines in the compressed <strong>nav-bar.html.gz</strong> that contain the specified pattern.</p>
+
+				<pre>zgrep 'Menu' nav-bar.html.gz</pre>
+
+				<img class="output-image" src="grep-dir-eg3.png" alt="Output Screenshot">
+
+				<h3>Explainiation:</h3>
+				<p>The command <code>zgrep 'Menu' nav-bar.html.gz</code> is used to search for the pattern <strong>'Menu'</strong> in a compressed file called <strong>nav-bar.html.gz</strong> using the zgrep command.</p>
+
 		</div>
 
 	</body>
