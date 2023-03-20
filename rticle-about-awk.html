@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Using grep with CSV files</title>
+		<style>
+                body {
+                        font-family: Arial, sans-serif;
+                        font-size: 16px;
+                        line-height: 1.5;
+                        color: #333;
+                        margin: 0;
+                        padding: 0;
+                        background-color: #f7f7f7;
+                }
+
+                .container {
+                        max-width: 800px;
+                        margin: 0 auto;
+                        padding: 20px;
+                        background-color: #fff;
+                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                }
+
+                h1 {
+                        font-size: 32px;
+                        margin-bottom: 20px;
+                        text-align: center;
+                        color: #333;
+                }
+
+                p {
+                        margin-bottom: 20px;
+                        line-height: 1.5;
+                }
+
+                pre {
+                        background-color: #f5f5f5;
+                        padding: 10px;
+                        overflow-x: auto;
+                        font-family: "Courier New", monospace;
+                        font-size: 14px;
+                        line-height: 1.2;
+                        color: #333;
+                }
+                .output-image {
+                        display: block;
+                        margin-top: 20px;
+                        max-width: 100%;
+                        height: auto;
+                }
+
+		/* Style the menu bar */
+	      .menu {
+			background-color: #333;
+			color: white;
+			width: 200px;
+			height: 100%;
+			position: fixed;
+			top: 0;
+			left: 0;
+			padding: 20px;
+	      }
+
+	      /* Style the menu items */
+	      .menu a {
+		      display: block;
+		      color: white;
+		      padding: 10px;
+		      text-decoration: none;
+	      }
+
+	      /* Style the selected menu item */
+	      .menu a.active {
+		      background-color: #4CAF50;
+	      }
+
+	      /* Style the page content */
+	      .content {
+		      margin-left: 200px;
+		      padding: 20px;
+	      }
+        </style>
+	</head>
+	<body>
+        <div class="container">
+			<!-- Menu bar -->
+			<div class="menu">
+				<!--a href="index.html">Home</a-->
+				<a href="article_index.html">Article</a>
+				<a href="article-about-grep.html">Article On GREP with CSV File</a>
+				<a href="article-about-awk.html" class="active">Article On AWK</a>
+                <a href="article-about-ip-addresses.html">Article About IP Addresses</a>
+				<!--<a href="check-whether-file-or-directory.html" >Check Whether File or Directory</a>
+				<a href="copy-data-from-one-file-to-another.html">Copy Data from One File to Another</a>
+				<a href="find_the_Largest_Number.html">Find the Largest Number</a>
+				<a href="print-weekday-or-working-day.html">Print Weekday or Working Day</a>
+				<a href="print_matching_keyword_line.html">Print Matching Keyword Line</a>
+				<a href="send-multiple-file-in-loop-on-single-sftp-server.html">Send Multiple File in Loop on Single SFTP Server</a>
+				<a href="upload-file-using-sftp.html">Upload File Using SFTP</a> -->
+			</div>
+		<h1>Introduction:</h1>
+
+			<p>The awk command is a powerful utility that is used for processing text files in Linux and Unix systems. It is a versatile tool that can be used for a variety of tasks, such as data extraction, text manipulation, and reporting. In this article, we will explore the different options and advanced usage of the awk command.</p>
+
+		<h2>Basic Usage:</h2>
+			<p>The basic syntax of the awk command is as follows:</p>
+			<pre>awk [options] 'pattern {action}' file</pre>
+
+            <p>Here, pattern is a regular expression that matches the text you want to process, and action is a set of commands that will be executed when the pattern is found. The file parameter specifies the name of the file to be processed.</p>
+
+            <h3>For example:</h3>
+            <p>The following command will print all lines in a file that contain the word "hello":</p>
+            <pre>awk '/hello/ {print}' myfile.txt</pre>
+
+			<img class="output-image" src="awk-eg1.png" alt="Output Screenshot">
+
+			<h3>Explainiation:</h3>
+
+			<p>The command <code>awk '/hello/ {print}' myfile.txt</code> </p>
+				<ul>
+					<li><code>`awk`</code>: This is the command to invoke the awk utility.</li>
+					<li><code>`'/hello/`</code>: This is the pattern to search for. The forward slashes indicate that "hello" is a regular expression. In this case, it matches any line that contains the string "hello".</li>
+					<li><code>`{print}`</code>: This is the action to perform when a line matching the pattern is found. In this case, it simply prints the line to the standard output.</li>
+                    <li><code>`myfile.txt`</code>: This is the name of the file to be searched.</li>
+				</ul>
+
+			<p>So, when you run this command, awk will search the myfile.txt file for any lines containing the string "hello", and then print those lines to the standard output. Any other lines in the file will be ignored.</p>
+		
+		<h2>Options: </h2>
+		
+			<p>The awk command provides several options that can be used to customize its behavior. Here are some of the most commonly used options:</p>
+                <ul>
+                    <li><code>`-F`</code>: This option is used to specify the field separator. By default, awk uses whitespace as the field separator, but you can use the -F option to specify a different separator.</li>
+                    <li><code>`For example`</code>, the following command will use a comma as the field separator:</li>
+                        <pre>awk -F ',' '{print $1, $3}' myfile.txt</pre>
+			            <img class="output-image" src="awk-op-eg1.png" alt="Output Screenshot">
+                        
+                    <li><code>`-v`</code>This option is used to define variables that can be used in the awk script.</li>
+                    <li><code>`For example`</code>, the following command will print all lines in a file that contain a number greater than a specified value:</li>
+                        <pre>awk -v num=10 '$1 > num {print}' myfile.txt</pre>
+                    
+                    <li><code>`-f`</code>This option is used to specify the name of an awk script file that contains the awk commands.</li>
+                    <li><code>`For example`</code>, the following command will execute the commands in the file named myscript.awk:</li>
+                        <pre>awk -f myscript.awk myfile.txt</pre>
+
+                    <li><code>`-F fs`</code>: This option specifies the field separator for the input file. By default, awk uses whitespace as the field separator, but this option can be used to specify a different separator.</li>
+                    <li><code>`For example`</code>, if we want to use a comma as the field separator, we can use the following command:</li>
+                        <pre>awk -F',' '{print $1}' file.txt</pre>
+
+			            <img class="output-image" src="awk-op-eg2.png" alt="Output Screenshot">
+
+                        <p>In this command, we are using -F',' to specify a comma as the field separator. The awk command will print the first field of each line in the file.</p>
+
+                    <li><code>`-v var=value`</code>: This option defines a variable that can be used in the awk script. The variable is assigned a value before the script is executed.</li>
+                    <li><code>`For example`</code>, if we want to print the value of a variable named "name", we can use the following command:</li>
+                        <pre>awk -v name="John" '{print "Hello " name}' file.txt</pre>
+
+                        <img class="output-image" src="awk-op-eg3.png" alt="Output Screenshot">
+
+                        <p>In this command, we are using <strong>-v name="John"</strong> to define a variable named "name" with a value of "John". The awk command will print "Hello John" for each line in the file.</p>
+                    
+                    <li><code>`-f progfile`</code>: This option specifies the name of an awk script file that contains the awk commands.</li>
+                    <li><code>`For example`</code>, if we have a script file named "script.awk" that contains the following command:</li>
+
+                        <pre># {print $1}</pre>
+                        <p>We can execute the script using the following command:</p>
+                        <pre># awk -f script.awk file.txt</pre>
+
+                        <img class="output-image" src="awk-op-eg4.png" alt="Output Screenshot">
+
+                        <p>In this command, we are using <strong>-f script.awk</strong> to specify the name of the script file. The awk command will execute the script on each line in the file and print the first field of each line.</p>
+
+                    <li><code>`'prog'`</code>: This option specifies the awk commands directly on the command line instead of in a separate file.</li>
+                    <li><code>`For example`</code>, if we want to print the second field of each line in the file, we can use the following command:</li>
+
+                        <pre>awk '{print $2}' file.txt</pre>
+
+                        <img class="output-image" src="awk-op-eg5.png" alt="Output Screenshot">
+
+                        <p>In this command, we are using <code>'{print $2}'</code> to specify the awk command directly on the command line. The awk command will print the second field of each line in the file.</p>
+
+                    <li><code>`--source`</code>: This option prints the awk program that is generated by the script or command.</li>
+                    <li><code>`For example`</code>, if we have a script file named "script.awk" that contains the following command:</li>
+
+                        <pre># {print $1}</pre>
+                        <ol>We can use the following command to print the awk program generated by the script:</ol>
+                        <pre>awk --source -f script.awk</pre>
+
+                        <img class="output-image" src="awk-op-eg6.png" alt="Output Screenshot">
+
+                        <p>In this command, we are using --source to print the awk program generated by the script.</p>
+
+                    <li><code>`-W compat`</code>: This option enables compatibility mode with older versions of awk.</li>
+                    <li><code>`For example`</code>, if we want to enable compatibility mode, we can use the following command:</li>
+
+                        <pre>awk -W compat '{print $1}' file.txt</pre>
+
+                        <img class="output-image" src="awk-op-eg7.png" alt="Output Screenshot">
+
+                        <p>In this command, we are using <code>-W compat</code> to enable compatibility mode. The awk command will print the first field of each line in the file.</p>
+
+                    <li><code>`-W gnu`</code>: This option enables GNU extensions to the awk language.</li>
+                    <li><code>`For example`</code>, if we want to enable GNU extensions, we can use the following command:</li>
+
+                        <pre>awk -W gnu '{print $1}' file.txt</pre>
+
+                        <img class="output-image" src="awk-op-eg8.png" alt="Output Screenshot">
+
+                        <p>In this command, we are using <code>-W gnu</code> to enable GNU extensions. The awk command will print the first field of each line in the</p>
+
+                </ul>
+
+            <h2>Advanced Usage: </h2>
+                <p>The awk command provides many advanced features that can be used to perform complex text processing tasks. Here are some examples:</p>
+                <ul>
+                    <li><code>`Using Regular Expressions`</code>: Awk provides powerful regular expression support that can be used to match and manipulate text.</li>
+                    <li><code>`For example`</code>, the following command will print all lines in a file that contain a phone number:</li>
+
+                    <pre>awk '/[0-9]{3}-[0-9]{3}-[0-9]{4}/ {print}' myfile.txt</pre>
+
+                    <img class="output-image" src="awk-ad-eg1.png" alt="Output Screenshot">
+
+                    <li><code>`Using Built-in Functions`</code>: Awk provides a number of built-in functions that can be used to perform various text processing tasks.</li>
+                    <li><code>`For example`</code>, the following command will print the length of each line in a file:</li>
+
+                    <pre>awk '{print length}' myfile.txt</pre>
+
+                    <img class="output-image" src="awk-ad-eg2.png" alt="Output Screenshot">
+
+                    <li><code>`Processing Multiple Files`</code>: Awk can be used to process multiple files at once.</li>
+                    <li><code>`For example`</code>, the following command will print all lines in multiple files that contain the word "hello":</li>
+
+                    <pre>awk '/hello/ {print}' file1.txt file2.txt file3.txt</pre>
+
+                    <img class="output-image" src="awk-ad-eg3.png" alt="Output Screenshot">
+
+                </ul>
+		</div>
+
+	</body>
+</html>
+
+
+
