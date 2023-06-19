@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Using grep with CSV files</title>
+		<style>
+                body {
+                        font-family: Arial, sans-serif;
+                        font-size: 16px;
+                        line-height: 1.5;
+                        color: #333;
+                        margin: 0;
+                        padding: 0;
+                        background-color: #f7f7f7;
+                }
+
+                .container {
+                        max-width: 800px;
+                        margin: 0 auto;
+                        padding: 20px;
+                        background-color: #fff;
+                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                }
+                
+                h2 {
+                	color: #993333
+                }
+
+                h1 {
+                        font-size: 32px;
+                        margin-bottom: 20px;
+                        text-align: center;
+                        color: #333;
+                }
+
+                p {
+                        margin-bottom: 20px;
+                        line-height: 1.5;
+                }
+
+                pre {
+                        background-color: #f5f5f5;
+                        padding: 10px;
+                        overflow-x: auto;
+                        font-family: "Courier New", monospace;
+                        font-size: 14px;
+                        line-height: 1.2;
+                        color: #333;
+                }
+                .output-image {
+                        display: block;
+                        margin-top: 20px;
+                        max-width: 100%;
+                        height: auto;
+                }
+
+		/* Style the menu bar */
+	      .menu {
+			background-color: #333;
+			color: white;
+			width: 200px;
+			height: 100%;
+			position: fixed;
+			top: 0;
+			left: 0;
+			padding: 20px;
+	      }
+
+	      /* Style the menu items */
+	      .menu a {
+		      display: block;
+		      color: white;
+		      padding: 10px;
+		      text-decoration: none;
+	      }
+
+	      /* Style the selected menu item */
+	      .menu a.active {
+		      background-color: #4CAF50;
+	      }
+
+	      /* Style the page content */
+	      .content {
+		      margin-left: 200px;
+		      padding: 20px;
+	      }
+        </style>
+	</head>
+	<body>
+        <div class="container">
+			<!-- Menu bar -->
+			<div class="menu">
+				<!--a href="index.html">Home</a-->
+				<a href="index.html">Home</a>
+				<a href="artical-about-grep.html">Article</a>
+				<a href="opsm_index.html" class="active">OPSM</a>
+				<!--<a href="check-whether-file-or-directory.html" >Check Whether File or Directory</a>
+				<a href="copy-data-from-one-file-to-another.html">Copy Data from One File to Another</a>
+				<a href="find_the_Largest_Number.html">Find the Largest Number</a>
+				<a href="print-weekday-or-working-day.html">Print Weekday or Working Day</a>
+				<a href="print_matching_keyword_line.html">Print Matching Keyword Line</a>
+				<a href="send-multiple-file-in-loop-on-single-sftp-server.html">Send Multiple File in Loop on Single SFTP Server</a>
+				<a href="upload-file-using-sftp.html">Upload File Using SFTP</a> -->
+			</div>
+			
+			<h1>Installation Instructions</h1>
+				
+			<p><strong>Before running the install.sh:</strong> Please download and unzip the paid plugins to the <code>new_plugins</code> folder.</p>
+			
+			<h2>Changes made in install.sh Script</h2>
+  
+			<h3><code>backupOldBuild()</code> Function</h3>
+			<pre><code>mkdir -p $OS_DATA_DIR/old_builds/$BACKUP_DIR/plugins/{defaults,paid,zustomer}</code>
+			</pre>
+			<p>Here we are creating a parent folder and its children which are <code>{defaults, paid, zustomer}</code>.</p>
+  			<h3>Copy all the old plugins in <code>$data/old_build</code> folder</h3>
+			<pre><code>echo "Taking backup of the $OS_PLUGIN_DIR/default folder ...";
+mv $OS_PLUGIN_DIR/default/*.jar $OS_DATA_DIR/old_builds/$BACKUP_DIR/plugins/defaults 
+mv $OS_PLUGIN_DIR/paid/*.jar $OS_DATA_DIR/old_builds/$BACKUP_DIR/plugins/paid/ 
+cp $OS_PLUGIN_DIR/zustomer/*.jar $OS_DATA_DIR/old_builds/$BACKUP_DIR/plugins/zustomer/</code>
+			</pre>
+			<p>Inside the <code>deployNewBuild()</code> Function, we are copying all the old plugins from <code>$OS_PLUGIN_DIR/default</code>, <code>$OS_PLUGIN_DIR/paid</code>, and <code>$OS_PLUGIN_DIR/zustomer</code> to the corresponding folders in <code>$OS_DATA_DIR/old_builds/$BACKUP_DIR/plugins</code>.</p>
+ 
+			<h3>Inside the <code>deployNewBuild()</code> Function</h3>
+			<pre><code>cp new_plugins/*.jar $OS_PLUGIN_DIR/paid</code>
+			</pre>
+			<p>We are copying the downloaded paid plugins from the <code>new_plugins</code> folder to the <code>$OS_PLUGIN_DIR/paid</code> folder.</p>
+		
+		</div>
+
+	</body>
+</html>
+
+
+
