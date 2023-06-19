@@ -364,11 +364,11 @@ main;
   
   
 			<h3><code>backupOldBuild()</code> Function</h3>
+			<p>Here we are creating a parent and child folder which are <code>plugins/{defaults, paid, zustomer}</code>.</p>
 			<pre><code>mkdir -p $OS_DATA_DIR/old_builds/$BACKUP_DIR/plugins/{defaults,paid,zustomer}</code>
 			</pre>
-			<p>Here we are creating a parent folder and its children which are <code>{defaults, paid, zustomer}</code>.</p>
-  			<h3>Copy all the old plugins in <code>$data/old_build</code> folder</h3>
-			<pre><code>echo "Taking backup of the $OS_PLUGIN_DIR/default folder ...";
+  			<h3>Copy all the old plugins inside the <code>$data/old_build/$BACKUP_DIR/plugins/</code> respective folders</h3>
+			<pre><code>echo "Taking backup of the $Respective/*.jar folder and its jar files ...";
 mv $OS_PLUGIN_DIR/default/*.jar $OS_DATA_DIR/old_builds/$BACKUP_DIR/plugins/defaults 
 mv $OS_PLUGIN_DIR/paid/*.jar $OS_DATA_DIR/old_builds/$BACKUP_DIR/plugins/paid/ 
 cp $OS_PLUGIN_DIR/zustomer/*.jar $OS_DATA_DIR/old_builds/$BACKUP_DIR/plugins/zustomer/</code>
@@ -376,8 +376,7 @@ cp $OS_PLUGIN_DIR/zustomer/*.jar $OS_DATA_DIR/old_builds/$BACKUP_DIR/plugins/zus
 			<p>Inside the <code>deployNewBuild()</code> Function, we are copying all the old plugins from <code>$OS_PLUGIN_DIR/default</code>, <code>$OS_PLUGIN_DIR/paid</code>, and <code>$OS_PLUGIN_DIR/zustomer</code> to the corresponding folders in <code>$OS_DATA_DIR/old_builds/$BACKUP_DIR/plugins</code>.</p>
  
 			<h3>Inside the <code>deployNewBuild()</code> Function</h3>
-			<pre><code>cp new_plugins/*.jar $OS_PLUGIN_DIR/paid</code>
-			</pre>
+			<pre><code>cp new_plugins/*.jar $OS_PLUGIN_DIR/paid</code></pre>
 			<p>We are copying the downloaded paid plugins from the <code>new_plugins</code> folder to the <code>$OS_PLUGIN_DIR/paid</code> folder.</p>
 		
 		</div>
