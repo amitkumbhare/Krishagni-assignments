@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Using grep with CSV files</title>
-		<style>
+  <head>
+    <meta charset="UTF-8">
+    <title>Using grep with CSV files</title>
+    <style>
                 body {
                         font-family: Arial, sans-serif;
                         font-size: 16px;
@@ -15,21 +15,21 @@
                 }
                 
                 .highlight {
-     					color: #4d0000;
-						background-color: #d1d1e0;
-						font-weight: bold;
-		}
-		
-		.hlight {
-			color: #00004d;
-			#background-color: #d1d1e0;
-			font-weight: bold;
-		}
-		
-        	ol {
-	            	font-family: Arial, sans-serif; 
-	            	font-size: 20px;
-	        }
+              color: #4d0000;
+            background-color: #d1d1e0;
+            font-weight: bold;
+    }
+    
+    .hlight {
+      color: #00004d;
+      #background-color: #d1d1e0;
+      font-weight: bold;
+    }
+    
+          ol {
+                font-family: Arial, sans-serif; 
+                font-size: 20px;
+          }
 
                 .container {
                         max-width: 800px;
@@ -40,7 +40,7 @@
                 }
                 
                 h2 {
-                	color: #993333
+                  color: #993333
                 }
 
                 h1 {
@@ -72,61 +72,61 @@
                         height: auto;
                 }
 
-		/* Style the menu bar */
-	      .menu {
-			background-color: #333;
-			color: white;
-			width: 200px;
-			height: 100%;
-			position: fixed;
-			top: 0;
-			left: 0;
-			padding: 20px;
-	      }
+    /* Style the menu bar */
+        .menu {
+      background-color: #333;
+      color: white;
+      width: 200px;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: 20px;
+        }
 
-	      /* Style the menu items */
-	      .menu a {
-		      display: block;
-		      color: white;
-		      padding: 10px;
-		      text-decoration: none;
-	      }
+        /* Style the menu items */
+        .menu a {
+          display: block;
+          color: white;
+          padding: 10px;
+          text-decoration: none;
+        }
 
-	      /* Style the selected menu item */
-	      .menu a.active {
-		      background-color: #4CAF50;
-	      }
+        /* Style the selected menu item */
+        .menu a.active {
+          background-color: #4CAF50;
+        }
 
-	      /* Style the page content */
-	      .content {
-		      margin-left: 200px;
-		      padding: 20px;
-	      }
+        /* Style the page content */
+        .content {
+          margin-left: 200px;
+          padding: 20px;
+        }
         </style>
-	</head>
-	<body>
+  </head>
+  <body>
         <div class="container">
-			<!-- Menu bar -->
-			<div class="menu">
-				<!--a href="index.html">Home</a>
-				<a href="index.html">Home</a>
-				<a href="artical-about-grep.html">Article</a-->
-				<a href="opsm_index.html">OPSM</a>
+      <!-- Menu bar -->
+      <div class="menu">
+        <!--a href="index.html">Home</a>
+        <a href="index.html">Home</a>
+        <a href="artical-about-grep.html">Article</a-->
+        <a href="opsm_index.html">OPSM</a>
         <a href="Changes_in_install.sh_script.html" class="active">Testing install.sh script of OpenSpecimen</a>
-				<!--<a href="check-whether-file-or-directory.html" >Check Whether File or Directory</a>
-				<a href="copy-data-from-one-file-to-another.html">Copy Data from One File to Another</a>
-				<a href="find_the_Largest_Number.html">Find the Largest Number</a>
-				<a href="print-weekday-or-working-day.html">Print Weekday or Working Day</a>
-				<a href="print_matching_keyword_line.html">Print Matching Keyword Line</a>
-				<a href="send-multiple-file-in-loop-on-single-sftp-server.html">Send Multiple File in Loop on Single SFTP Server</a>
-				<a href="upload-file-using-sftp.html">Upload File Using SFTP</a> -->
-			</div>
-			
-			<h1>Installation Instructions</h1>
-				
-			<p><strong>Before running the install.sh:</strong> Please download and unzip the paid plugins to the <code>new_plugins</code> folder.</p>
-			
-			<pre> #!/bin/bash
+        <!--<a href="check-whether-file-or-directory.html" >Check Whether File or Directory</a>
+        <a href="copy-data-from-one-file-to-another.html">Copy Data from One File to Another</a>
+        <a href="find_the_Largest_Number.html">Find the Largest Number</a>
+        <a href="print-weekday-or-working-day.html">Print Weekday or Working Day</a>
+        <a href="print_matching_keyword_line.html">Print Matching Keyword Line</a>
+        <a href="send-multiple-file-in-loop-on-single-sftp-server.html">Send Multiple File in Loop on Single SFTP Server</a>
+        <a href="upload-file-using-sftp.html">Upload File Using SFTP</a> -->
+      </div>
+      
+      <h1>Installation Instructions</h1>
+        
+      <p><strong>Before running the install.sh:</strong> Please download and unzip the paid plugins to the <code>new_plugins</code> folder.</p>
+      
+      <pre> #!/bin/bash
 
 PROPERTY_FILE=$1
 
@@ -413,72 +413,69 @@ main() {
 
 main;
 </pre>
-			
-			<h2>Changes made in install.sh Script are highlighted above, and below is the explainiation.</h2>
-			
-			<p>You can <a download href="install.sh">Download</a> current install.sh script for comparision.</p>
-			<h3><code>Inside the backupOldBuild()</code> Function</h3>
-			<p>Here we are creating a parent and child folder which are <code>plugins/{defaults, paid, zustomer}</code>.</p>
-			<pre><code>mkdir -p $OS_DATA_DIR/old_builds/$BACKUP_DIR/plugins/{defaults,paid,zustomer}</code>
-			</pre>
-  			<h3>Copy all the old plugins inside the <code>$data/old_build/$BACKUP_DIR/plugins/</code> respective folders</h3>
-			<pre><code>echo "Taking backup of the $Respective/*.jar folder and its jar files ...";
+      
+      <h2>Changes made in install.sh Script are highlighted above, and below is the explanation.</h2>
+      
+      <p>You can <a download href="install.sh">Download</a> current install.sh script for comparison.</p>
+      <h3><code>Inside the backupOldBuild()</code> Function</h3>
+      <p>Here we are creating a parent and child folder which are <code>plugins/{defaults, paid, zustomer}</code>.</p>
+      <pre><code>mkdir -p $OS_DATA_DIR/old_builds/$BACKUP_DIR/plugins/{defaults,paid,zustomer}</code>
+      </pre>
+        <h3>Copy all the old plugins inside the <code>$data/old_build/$BACKUP_DIR/plugins/</code> respective folders</h3>
+      <pre><code>echo "Taking backup of the $Respective/*.jar folder and its jar files ...";
 mv $OS_PLUGIN_DIR/default/*.jar $OS_DATA_DIR/old_builds/$BACKUP_DIR/plugins/defaults 
 mv $OS_PLUGIN_DIR/paid/*.jar $OS_DATA_DIR/old_builds/$BACKUP_DIR/plugins/paid/ 
 cp $OS_PLUGIN_DIR/zustomer/*.jar $OS_DATA_DIR/old_builds/$BACKUP_DIR/plugins/zustomer/</code>
-			</pre>
-			<p>Inside the <code>deployNewBuild()</code> Function, we are copying all the old plugins from <code>$OS_PLUGIN_DIR/default</code>, <code>$OS_PLUGIN_DIR/paid</code>, and <code>$OS_PLUGIN_DIR/zustomer</code> to the corresponding folders in <code>$OS_DATA_DIR/old_builds/$BACKUP_DIR/plugins</code>.</p>
+      </pre>
+      <p>Inside the <code>deployNewBuild()</code> Function, we are copying all the old plugins from <code>$OS_PLUGIN_DIR/default</code>, <code>$OS_PLUGIN_DIR/paid</code>, and <code>$OS_PLUGIN_DIR/zustomer</code> to the corresponding folders in <code>$OS_DATA_DIR/old_builds/$BACKUP_DIR/plugins</code>.</p>
  
-			<h3>Inside the <code>deployNewBuild()</code> Function</h3>
-			<pre><code>cp new_plugins/*.jar $OS_PLUGIN_DIR/paid</code></pre>
-			<p>We are copying the downloaded paid plugins from the <code>new_plugins</code> folder to the <code>$OS_PLUGIN_DIR/paid</code> folder.</p>
+      <h3>Inside the <code>deployNewBuild()</code> Function</h3>
+      <pre><code>cp new_plugins/*.jar $OS_PLUGIN_DIR/paid</code></pre>
+      <p>We are copying the downloaded paid plugins from the <code>new_plugins</code> folder to the <code>$OS_PLUGIN_DIR/paid</code> folder.</p>
 
       <hr><hr>
 
-      <h2>Additionals changes to the Script:</h2>
-			
-	<h3>Lates changes are highlighted with Midnight Blue changes we made to the script.</h3>
+      <h2>Additional changes to the Script:</h2>
+      
+  <h3>Latest changes are highlighted with Midnight Blue color.</h3>
 
-      <p>We have made the changes to the script which will take the backup and Deploye all required plugins to the server with the help of user interaction.</p>
+      <p>We have made the changes to the script which will take the backup and deploy all required plugins to the server with the help of user assistance.</p>
       
       <h2>Explanation:</h2>
 
-	<ol>
-	<li>The script begins by prompting the user with the question: <b>"Do you need to deploy paid plugins? [YES/NO]"</b>. The user's response is stored in the variable <i>deploy_plugins</i>.</li>
-	<br>
-	<li>If the value of <i>deploy_plugins</i> is <b>"YES"</b>, the script proceeds to ask another question: <strong>"Is it a master build or release candidate (RC)? [MASTER/RC]"</strong>. The user's response is stored in the variable build_type.</li>
+  <ol>
+  <li>The script begins by prompting the user with the question: <b>"Do you need to deploy paid plugins? [YES/NO]"</b>. The user's response is stored in the variable <i>deploy_plugins</i>.</li>
+  <br>
+  <li>If the value of <i>deploy_plugins</i> is <b>"YES"</b>, the script proceeds to ask another question: <strong>"Is it a master build or release candidate (RC)? [MASTER/RC]"</strong>. The user's response is stored in the variable build_type.</li>
 
-	<br>
-	<li>If the value of <i>build_type</i> is <b>"MASTER"</b>, the script creates two directories named <b>"extra"</b> and <b>"new_plugins"</b> using the mkdir command. It then moves all the files in the <b>"plugin_build"</b> directory to the <b>"extra"</b> directory using the mv command. The script changes its working directory to <b>"extra"</b> using the cd command.</li>
+  <br>
+  <li>If the value of <i>build_type</i> is <b>"MASTER"</b>, the script creates two directories named <b>"extra"</b> and <b>"new_plugins"</b> using the mkdir command. It then moves all the files in the <b>"plugin_build"</b> directory to the <b>"extra"</b> directory using the mv command. The script changes its working directory to <b>"extra"</b> using the cd command.</li>
 
-<br>	
-	<li>Inside the <b>"extra"</b> directory, specific JAR files are renamed and moved back to the <b>"plugin_build"</b> directory using the mv command. The names of the plugins are read from the user, separated by spaces, and stored in the array <b>plugin_names</b>.</li>
+<br>  
+  <li>Inside the <b>"extra"</b> directory, specific JAR files are renamed and moved back to the <b>"plugin_build"</b> directory using the mv command. The names of the plugins are read from the user, separated by spaces, and stored in the array <b>plugin_names</b>.</li>
 
-<br>	
-	<li>For each plugin in the <i>plugin_names</i> array, the script copies the plugin file from its current location to the <b>"new_plugins"</b> directory using the cp command.</li>
+<br>  
+  <li>For each plugin in the <i>plugin_names</i> array, the script copies the plugin file from its current location to the <b>"new_plugins"</b> directory using the cp command.</li>
 
-<br>	
-	<li>The script copies all JAR files from the <b>"plugin_build"</b> directory to the destination directory specified by the <b>$OS_PLUGIN_DIR/default</b> path using the cp command. It also copies the JAR files from the <b>"new_plugins"</b> directory to the destination directory specified by the <b>$OS_PLUGIN_DIR/paid</b> path.</li>
+<br>  
+  <li>The script copies all JAR files from the <b>"plugin_build"</b> directory to the destination directory specified by the <b>$OS_PLUGIN_DIR/default</b> path using the cp command. It also copies the JAR files from the <b>"new_plugins"</b> directory to the destination directory specified by the <b>$OS_PLUGIN_DIR/paid</b> path.</li>
 
-<br>	
-	<li>If the value of <i>build_type</i> is not <b>"MASTER"</b>, the script creates a directory named <b>"new_plugins"</b> using the mkdir command and changes its working directory to <b>"new_plugins"</b> using the cd command.</li>
+<br>  
+  <li>If the value of <i>build_type</i> is not <b>"MASTER"</b>, the script creates a directory named <b>"new_plugins"</b> using the mkdir command and changes its working directory to <b>"new_plugins"</b> using the cd command.</li>
 
-<br>	
-	<li>Inside the <b>"new_plugins"</b> directory, the script enters a loop where it asks the user to enter the URL of a paid plugin. If the user enters <b>"done"</b>, the loop breaks and the script continues to the next step.</li>
+<br>  
+  <li>Inside the <b>"new_plugins"</b> directory, the script enters a loop where it asks the user to enter the URL of a paid plugin. If the user enters <b>"done"</b>, the loop breaks and the script continues to the next step.</li>
 
-<br>	
-	<li>For each plugin URL entered by the user, the script prompts for a password and uses the wget command to download the plugin build from the provided URL. The downloaded file is then unzipped using the unzip command.</li>
+<br>  
+  <li>For each plugin URL entered by the user, the script prompts for a password and uses the wget command to download the plugin build from the provided URL. The downloaded file is then unzipped using the unzip command.</li>
 
-<br>	
-	<li>After the loop ends, the script copies all JAR files from the <b>"plugin_build"</b> directory to the destination directory specified by the <b>$OS_PLUGIN_DIR/default</b> path using the cp command. It also copies the JAR files from the <b>"new_plugins"</b> directory to the destination directory specified by the <b>$OS_PLUGIN_DIR/paid</b> path.</li>
+<br>  
+  <li>After the loop ends, the script copies all JAR files from the <b>"plugin_build"</b> directory to the destination directory specified by the <b>$OS_PLUGIN_DIR/default</b> path using the cp command. It also copies the JAR files from the <b>"new_plugins"</b> directory to the destination directory specified by the <b>$OS_PLUGIN_DIR/paid</b> path.</li>
 
-<br>	
-	<li>If the value of <i>deploy_plugins</i> is <b>"NO"</b>, the script simply prints the message <b>"You choose not to Deploy any Paid Plugins."</b></li>
-	</ol>		
-		</div>
+<br>  
+  <li>If the value of <i>deploy_plugins</i> is <b>"NO"</b>, the script simply prints the message <b>"You choose not to Deploy any Paid Plugins."</b></li>
+  </ol>   
+    </div>
 
-	</body>
+  </body>
 </html>
-
-
-
