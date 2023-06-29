@@ -15,10 +15,15 @@
                 }
                 
                 .highlight {
-     					color: red;
-						background-color: yellow;
+     					color: #4d0000;
+						background-color: #d1d1e0;
 						font-weight: bold;
 		}
+		
+        	ol {
+	            	font-family: 'Garamond', cursive; 
+	            	font-size: 20px;
+	        }
 
                 .container {
                         max-width: 800px;
@@ -45,7 +50,7 @@
                 }
 
                 pre {
-                        background-color: #f5f5f5;
+                        background-color: #d9d9d9;
                         padding: 10px;
                         max-height: 800px;
                         overflow-x: auto;
@@ -404,8 +409,10 @@ if [[ $deploy_plugins == "YES" ]]; then
     if [[ $build_type == "MASTER" ]]; then
       mkdir extra new_plugins
       mv -v plugin_build/* extra/
+      echo "----------------------------------------------------------------"
       cd extra
       mv -v os-dashboard-master.jar os-distribution-invoicing-master.jar os-extras-master.jar os-rde-master.jar os-sde-master.jar os-specimen-gel-master.jar specimen-array-master.jar specimen-catalog-master.jar ../plugin_build/
+      echo "----------------------------------------------------------------"
       echo "Enter the names of the plugins (separated by spaces): "
       read -a plugin_names
         for plugin in "${plugin_names[@]}"; do
@@ -413,6 +420,7 @@ if [[ $deploy_plugins == "YES" ]]; then
         done
         cp ../plugin_build/*.jar $OS_PLUGIN_DIR/default
         cp ../new_plugins/*.jar $OS_PLUGIN_DIR/paid
+        echo "----------------------------------------------------------------"
     else
       mkdir new_plugins
       cd new_plugins
@@ -426,13 +434,15 @@ if [[ $deploy_plugins == "YES" ]]; then
             wget --auth-no-challenge --user=Krishagni --password="$password" --no-check-certificate "$plugin_url"
             unzip_file=$(basename "$plugin_url")
             unzip "$unzip_file"
+            echo "----------------------------------------------------------------"
           fi
       done
       cp ../plugin_build/*.jar $OS_PLUGIN_DIR/default
       cp ../new_plugins/*.jar $OS_PLUGIN_DIR/paid
+      echo "----------------------------------------------------------------"
     fi
   else
-  echo "Build is downloaded successfully."
+  echo "You choose not to Deploy any Paid Plugins."
 fi</code>
 echo "Copying new WAR ...";
 cp ../openspecimen.war $TOMCAT_PATH/webapps/$WAR_NAME.war
@@ -460,8 +470,41 @@ main() {
 main;</pre>
 
       <p>We have made the changes to the script which will take the backup and Deploye all required plugins to the server with the help of user interaction.</p>
+      
+      <h2>Explanation:</h2>
 
-		
+	<ol>
+	<li>The script begins by prompting the user with the question: <b>"Do you need to deploy paid plugins? [YES/NO]"</b>. The user's response is stored in the variable <i>deploy_plugins</i>.</li>
+	<br>
+	<li>If the value of <i>deploy_plugins</i> is <b>"YES"</b>, the script proceeds to ask another question: <strong>"Is it a master build or release candidate (RC)? [MASTER/RC]"</strong>. The user's response is stored in the variable build_type.</li>
+
+	<br>
+	<li>If the value of <i>build_type</i> is <b>"MASTER"</b>, the script creates two directories named <b>"extra"</b> and <b>"new_plugins"</b> using the mkdir command. It then moves all the files in the <b>"plugin_build"</b> directory to the <b>"extra"</b> directory using the mv command. The script changes its working directory to <b>"extra"</b> using the cd command.</li>
+
+<br>	
+	<li>Inside the <b>"extra"</b> directory, specific JAR files are renamed and moved back to the <b>"plugin_build"</b> directory using the mv command. The names of the plugins are read from the user, separated by spaces, and stored in the array <b>plugin_names</b>.</li>
+
+<br>	
+	<li>For each plugin in the <i>plugin_names</i> array, the script copies the plugin file from its current location to the <b>"new_plugins"</b> directory using the cp command.</li>
+
+<br>	
+	<li>The script copies all JAR files from the <b>"plugin_build"</b> directory to the destination directory specified by the <b>$OS_PLUGIN_DIR/default</b> path using the cp command. It also copies the JAR files from the <b>"new_plugins"</b> directory to the destination directory specified by the <b>$OS_PLUGIN_DIR/paid</b> path.</li>
+
+<br>	
+	<li>If the value of <i>build_type</i> is not <b>"MASTER"</b>, the script creates a directory named <b>"new_plugins"</b> using the mkdir command and changes its working directory to <b>"new_plugins"</b> using the cd command.</li>
+
+<br>	
+	<li>Inside the <b>"new_plugins"</b> directory, the script enters a loop where it asks the user to enter the URL of a paid plugin. If the user enters <b>"done"</b>, the loop breaks and the script continues to the next step.</li>
+
+<br>	
+	<li>For each plugin URL entered by the user, the script prompts for a password and uses the wget command to download the plugin build from the provided URL. The downloaded file is then unzipped using the unzip command.</li>
+
+<br>	
+	<li>After the loop ends, the script copies all JAR files from the <b>"plugin_build"</b> directory to the destination directory specified by the <b>$OS_PLUGIN_DIR/default</b> path using the cp command. It also copies the JAR files from the <b>"new_plugins"</b> directory to the destination directory specified by the <b>$OS_PLUGIN_DIR/paid</b> path.</li>
+
+<br>	
+	<li>If the value of <i>deploy_plugins</i> is <b>"NO"</b>, the script simply prints the message <b>"You choose not to Deploy any Paid Plugins."</b></li>
+	</ol>		
 		</div>
 
 	</body>
