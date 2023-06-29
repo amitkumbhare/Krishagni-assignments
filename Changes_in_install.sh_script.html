@@ -20,6 +20,12 @@
 						font-weight: bold;
 		}
 		
+		.hlight {
+			color: #00004d;
+			#background-color: #d1d1e0;
+			font-weight: bold;
+		}
+		
         	ol {
 	            	font-family: Arial, sans-serif; 
 	            	font-size: 20px;
@@ -339,6 +345,49 @@ deployNewBuild() {
   cp plugin_build/*.jar $OS_PLUGIN_DIR/default
 <code class="highlight">  cp new_plugins/*.jar $OS_PLUGIN_DIR/paid </code>
 
+<code class="hlight">
+  read -p "Do you need to deploy paid plugins? [YES/NO]: " deploy_plugins
+  if [[ $deploy_plugins == "YES" ]]; then
+    read -p "Is it a master build or release candidate (RC)? [MASTER/RC]: " build_type
+      if [[ $build_type == "MASTER" ]]; then
+        mkdir extra new_plugins
+        mv -v plugin_build/* extra/
+        echo "----------------------------------------------------------------"
+        cd extra
+        mv -v os-dashboard-master.jar os-distribution-invoicing-master.jar os-extras-master.jar os-rde-master.jar os-sde-master.jar os-specimen-gel-master.jar specimen-array-master.jar specimen-catalog-master.jar ../plugin_build/
+        echo "----------------------------------------------------------------"
+        echo "Enter the names of the plugins (separated by spaces): "
+        read -a plugin_names
+          for plugin in "${plugin_names[@]}"; do
+            cp "$plugin" ../new_plugins/
+          done
+          cp ../plugin_build/*.jar $OS_PLUGIN_DIR/default
+          cp ../new_plugins/*.jar $OS_PLUGIN_DIR/paid
+          echo "----------------------------------------------------------------"
+      else
+        mkdir new_plugins
+        cd new_plugins
+        while true; do
+          read -p "Enter the URL of a paid plugin (or 'done' to finish): " plugin_url
+            if [[ $plugin_url == "done" ]]; then
+              break
+            else
+              echo -n "Enter password to download the build: "
+              read -rs password
+              wget --auth-no-challenge --user=Krishagni --password="$password" --no-check-certificate "$plugin_url"
+              unzip_file=$(basename "$plugin_url")
+              unzip "$unzip_file"
+              echo "----------------------------------------------------------------"
+            fi
+        done
+        cp ../plugin_build/*.jar $OS_PLUGIN_DIR/default
+        cp ../new_plugins/*.jar $OS_PLUGIN_DIR/paid
+        echo "----------------------------------------------------------------"
+      fi
+    else
+    echo "You choose not to Deploy any Paid Plugins."
+  fi</code>
+
   echo "Copying new WAR ...";
   cp openspecimen.war $TOMCAT_PATH/webapps/$WAR_NAME.war
 
@@ -366,8 +415,8 @@ main;
 </pre>
 			
 			<h2>Changes made in install.sh Script are highlighted above, and below is the explainiation.</h2>
-  
-  
+			
+			<p>You can <a download href="www.github.com/amitkumbhare/Krishagni-assignments/blob/main/text.txt">Download</a> current install.sh script for comparision.</p>
 			<h3><code>Inside the backupOldBuild()</code> Function</h3>
 			<p>Here we are creating a parent and child folder which are <code>plugins/{defaults, paid, zustomer}</code>.</p>
 			<pre><code>mkdir -p $OS_DATA_DIR/old_builds/$BACKUP_DIR/plugins/{defaults,paid,zustomer}</code>
@@ -388,86 +437,7 @@ cp $OS_PLUGIN_DIR/zustomer/*.jar $OS_DATA_DIR/old_builds/$BACKUP_DIR/plugins/zus
 
       <h2>Additionals changes to the Script:</h2>
 			
-			<h3>Below are the highlighted changes we made to the script.</h3>
-
-      <pre>
-deployNewBuild() {
-echo "Web App name : $WAR_NAME";
-          
-echo "Copying $PROPERTY_FILE to $TOMCAT_PATH/conf/$WAR_NAME.properties"
-cp $PROPERTY_FILE $TOMCAT_PATH/conf/$WAR_NAME.properties
-        
-echo "Copying database connector jars to $TOMCAT_PATH/lib"
-cp db-connectors/mysql-connector*.jar $TOMCAT_PATH/lib/ 
-cp db-connectors/ojdbc*.jar $TOMCAT_PATH/lib/
-        
-echo "Copying new plugins ...";
-<code class="highlight">
-read -p "Do you need to deploy paid plugins? [YES/NO]: " deploy_plugins
-if [[ $deploy_plugins == "YES" ]]; then
-  read -p "Is it a master build or release candidate (RC)? [MASTER/RC]: " build_type
-    if [[ $build_type == "MASTER" ]]; then
-      mkdir extra new_plugins
-      mv -v plugin_build/* extra/
-      echo "----------------------------------------------------------------"
-      cd extra
-      mv -v os-dashboard-master.jar os-distribution-invoicing-master.jar os-extras-master.jar os-rde-master.jar os-sde-master.jar os-specimen-gel-master.jar specimen-array-master.jar specimen-catalog-master.jar ../plugin_build/
-      echo "----------------------------------------------------------------"
-      echo "Enter the names of the plugins (separated by spaces): "
-      read -a plugin_names
-        for plugin in "${plugin_names[@]}"; do
-          cp "$plugin" ../new_plugins/
-        done
-        cp ../plugin_build/*.jar $OS_PLUGIN_DIR/default
-        cp ../new_plugins/*.jar $OS_PLUGIN_DIR/paid
-        echo "----------------------------------------------------------------"
-    else
-      mkdir new_plugins
-      cd new_plugins
-      while true; do
-        read -p "Enter the URL of a paid plugin (or 'done' to finish): " plugin_url
-          if [[ $plugin_url == "done" ]]; then
-            break
-          else
-            echo -n "Enter password to download the build: "
-            read -rs password
-            wget --auth-no-challenge --user=Krishagni --password="$password" --no-check-certificate "$plugin_url"
-            unzip_file=$(basename "$plugin_url")
-            unzip "$unzip_file"
-            echo "----------------------------------------------------------------"
-          fi
-      done
-      cp ../plugin_build/*.jar $OS_PLUGIN_DIR/default
-      cp ../new_plugins/*.jar $OS_PLUGIN_DIR/paid
-      echo "----------------------------------------------------------------"
-    fi
-  else
-  echo "You choose not to Deploy any Paid Plugins."
-fi</code>
-echo "Copying new WAR ...";
-cp ../openspecimen.war $TOMCAT_PATH/webapps/$WAR_NAME.war
-        
-echo "Starting Tomcat server ...";
-$TOMCAT_PATH/bin/./startup.sh
-        
-echo "#####################################################################"
-echo "OpenSpecimen is installed successfully.Please check the log files."
-echo "You can find log files at following locations: "
-echo "Tomcat logs: $TOMCAT_PATH/logs/catalina.out"
-echo "OpenSpecimen logs: $OS_DATA_DIR/logs/os.log"
-echo "#####################################################################"
-}
-        
-main() {
-  ensurePropsFileSpecified;
-  initVariables;
-  ensurePrerequisites;
-  ensureDataAndPluginDirsExist;
-  backupOldBuild;
-  deployNewBuild;
-}
-        
-main;</pre>
+	<h3>Lates changes are highlighted with Midnight Blue changes we made to the script.</h3>
 
       <p>We have made the changes to the script which will take the backup and Deploye all required plugins to the server with the help of user interaction.</p>
       
