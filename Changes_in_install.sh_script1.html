@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Using grep with CSV files</title>
+    <style>
+                body {
+                        font-family: Arial, sans-serif;
+                        font-size: 16px;
+                        line-height: 1.5;
+                        color: #333;
+                        margin: 0;
+                        padding: 0;
+                        background-color: #f7f7f7;
+                }
+                
+                .highlight {
+                color: #4d0000;
+                background-color: #d1d1e0;
+                font-weight: bold;
+                }
+    
+		.hlight {
+		color: #00004d;
+		#background-color: #d1d1e0;
+		font-weight: bold;
+		}
+    	
+    		strong {
+		color: #cc4400;
+		}
+		
+		b {
+		color: #004080;
+		}
+		
+		i {
+		color: #000000;
+		font-weight: bold;
+		}
+    
+		ol {
+		font-family: Arial, sans-serif;
+		font-size: 16px;
+		color: #000000;
+		}
+
+                .container {
+                        max-width: 800px;
+                        margin: 0 auto;
+                        padding: 20px;
+                        background-color: #fff;
+                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                }
+                
+                h2 {
+                  	 color: #993333
+                }
+
+                .multicolor-text {
+                        font-size: 32px;
+                        margin-bottom: 20px;
+                        text-align: center;
+                        background: linear-gradient(to left,
+                    #b3b300,
+                    #7575a3,
+                    #3399ff,
+                    #1fc11f,
+                    #e6ac00,
+                    #bf8040,
+                    #ff6633); -webkit-background-clip: text;
+           		 color: transparent;
+                }
+
+                p {
+                        margin-bottom: 20px;
+                        line-height: 1.5;
+                        color: #000000;
+                }
+
+                pre {
+                        background-color: #d9d9d9;
+                        padding: 10px;
+                        max-height: 800px;
+                        overflow-x: auto;
+                        font-family: "Courier New", monospace;
+                        font-size: 14px;
+                        line-height: 1.2;
+                        color: #333;
+                }
+                .output-image {
+                        display: block;
+                        margin-top: 20px;
+                        max-width: 100%;
+                        height: auto;
+                }
+
+		/* Style the menu bar */
+		.menu {
+		background-color: #333;
+		color: white;
+		width: 200px;
+		height: 100%;
+		position: fixed;
+		top: 0;
+		left: 0;
+		padding: 20px;
+		}
+		
+		/* Style the menu items */
+		.menu a {
+		display: block;
+		color: white;
+		padding: 10px;
+		text-decoration: none;
+		}
+
+		/* Style the selected menu item */
+		.menu a.active {
+		background-color: #4CAF50;
+		}
+
+		/* Style the page content */
+		.content {
+		margin-left: 200px;
+		padding: 20px;
+		}
+        </style>
+  </head>
+  <body>
+        <div class="container">
+      <!-- Menu bar -->
+      <div class="menu">
+        <!--a href="index.html">Home</a>
+        <a href="index.html">Home</a>
+        <a href="artical-about-grep.html">Article</a-->
+        <a href="opsm_index.html">OPSM</a>
+        <a href="Changes_in_install.sh_script1.html" class="active">Testing install.sh script of OpenSpecimen</a>
+        <!--<a href="check-whether-file-or-directory.html" >Check Whether File or Directory</a>
+        <a href="copy-data-from-one-file-to-another.html">Copy Data from One File to Another</a>
+        <a href="find_the_Largest_Number.html">Find the Largest Number</a>
+        <a href="print-weekday-or-working-day.html">Print Weekday or Working Day</a>
+        <a href="print_matching_keyword_line.html">Print Matching Keyword Line</a>
+        <a href="send-multiple-file-in-loop-on-single-sftp-server.html">Send Multiple File in Loop on Single SFTP Server</a>
+        <a href="upload-file-using-sftp.html">Upload File Using SFTP</a> -->
+      </div>
+      
+      <h1 class="multicolor-text">Installation Instructions</h1>
+        
+      <p><strong>Before running the install.sh:</strong> Please download and unzip the paid plugins to the <code>new_plugins</code> folder.</p>
+      
+      <p>Create plugin.csv file inside the <code>`Data`</code> directory. It should look like below screenshot.</p>
+      
+      <img class="plugin-csv" src="plugin-csv.png" alt="Output Screenshot">
+      
+      
+      <pre> #!/bin/bash
+
+PROPERTY_FILE=$1
+
+ensurePropsFileSpecified() {
+  if [ -z "$PROPERTY_FILE" ]; then
+    echo "Error: Please specify the absolute path of OpenSpecimen deployment properties file.";
+    echo "Usage: install.sh <absolute-path-to-properties-file>";
+    exit 1;
+  fi
+}
+
+initVariables() {
+  WAR_NAME=$(cat $PROPERTY_FILE | grep "^app.name=" | cut -d'=' -f2 | sed 's/ //g');
+  if [ -z "$WAR_NAME" ]; then
+    echo "Error: App name not specified. Please specify the value for app.name in $PROPERTY_FILE";
+    exit 1;
+  fi
+  
+  TOMCAT_PATH=$(cat $PROPERTY_FILE | grep "^tomcat.dir=" | cut -d'=' -f2 | sed 's/ //g');
+  if [ -z "$TOMCAT_PATH" ]; then
+    echo "Error: Tomcat home directory path is not specified. Please specify the value for tomcat.dir in $PROPERTY_FILE";
+    exit 1;
+  fi
+  
+  if [ ! -f "$TOMCAT_PATH/bin/startup.sh" ]; then
+    echo "Error: $TOMCAT_PATH doesn't appear to be the Tomcat home directory.";
+    exit 1;
+  fi
+  
+  OS_DATA_DIR=$(cat $PROPERTY_FILE | grep "^app.data_dir=" | cut -d'=' -f2 | sed 's/ //g');
+  if [ -z "$OS_DATA_DIR" ]; then
+    echo "Error: OS data directory path is not specified. Please specify the value for app.data_dir in $PROPERTY_FILE";
+    exit 1;
+  fi
+  
+  OS_PLUGIN_DIR=$(cat $PROPERTY_FILE | grep "^plugin.dir=" | cut -d'=' -f2 | sed 's/ //g');
+  if [ -z "$OS_PLUGIN_DIR" ]; then
+    echo "Error: OS plugins directory path is not specified. Please specify the value for plugin.dir in $PROPERTY_FILE";
+    exit 1;
+  fi
+  
+  DATABASE_TYPE=$(cat $PROPERTY_FILE | grep "^database.type=" | cut -d'=' -f2 | sed 's/ //g');
+  if [ -z "$DATABASE_TYPE" ]; then
+    echo "Error: Database type is not specified. Please specify the value for database.type in $PROPERTY_FILE";
+    echo "The valid values for database.type are mysql and oracle";
+    exit 1;
+  fi
+  
+  DATASOURCE_JNDI=$(cat $PROPERTY_FILE | grep "^datasource.jndi=" | cut -d'=' -f2 | sed 's/ //g');
+  if [ -z "$DATASOURCE_JNDI" ]; then
+    echo "Error: Tomcat data source name is not specified. Please specify the value for datasource.jndi in $PROPERTY_FILE";
+    echo "The value for datasource.jndi will be same as the data source JNDI name configured in $TOMCAT_PATH/conf/context.xml";
+    exit 1;
+  fi
+  
+  DATASOURCE_TYPE=$(cat $PROPERTY_FILE | grep "^datasource.type=" | cut -d'=' -f2 | sed 's/ //g');
+  if [ -z "$DATASOURCE_TYPE" ]; then
+    echo "Error: Database schema type is not specified. Please specify the value for datasource.type in $PROPERTY_FILE";
+    echo "The valid values for datasource.type are fresh and upgrade";
+    exit 1;
+  fi
+  
+  BACKUP_DIR=$(date '+%d%m%Y_%H%M%S');
+}
+
+ensurePrerequisites() {
+  javaversion=$(java -version 2>&1 | grep -i version | awk '{print $3}' | cut -d'"' -f2 | cut -d'.' -f1)
+ 
+  if [ "$javaversion" == "17" ]; then
+    echo "Java version check...pass"
+  else
+    echo "Install java 17 to proceed with installation."
+    exit 1
+  fi
+  read -p "Is MySQL server installed on the same machine? If no, please make sure MySQL 5.7 version is installed on the remote database server (y/n):" input
+
+  if [ "$input" == "y" ]; then
+    if [[ "$DATABASE_TYPE" == "mysql" ]]; then
+      mysql --version 2>&1 | grep "5.7"
+      rc=$?;
+      if [[ $rc == 0 ]]; then
+        echo "MySQL version check...pass";
+      else
+        echo "Need to install MySQL 5.7 to proceed with installation.";
+        exit 1;
+      fi
+    fi
+  fi
+
+  tomcatversion=`$TOMCAT_PATH/bin/./version.sh | grep "Server version"  | cut -d'/' -f2 | cut -d'.' -f1`
+  if [[ $tomcatversion == 9 ]]; then
+    echo "Tomcat version check...pass";
+  else
+    echo "Install Tomcat 9 from build zip to proceed with installation.";
+    exit 1;
+  fi
+}
+
+ensureDataAndPluginDirsExist() {
+  if [ ! -d "$OS_PLUGIN_DIR" ]; then
+    mkdir -p $OS_PLUGIN_DIR
+    rc=$?;
+    if [[ $rc != 0 ]]; then
+      echo "Error: Could not create the plugins directory $OS_PLUGIN_DIR. Please ensure you've appropriate rights to create the directory.";
+      exit $rc;
+    fi
+  fi
+
+  if [ -d "$OS_PLUGIN_DIR" ]; then
+    touch  $OS_PLUGIN_DIR/test.txt
+    rc=$?;
+    rm $OS_PLUGIN_DIR/test.txt
+    
+    if [[ $rc != 0 ]]; then
+      echo "Error: Do not have write permissions on the directory $OS_PLUGIN_DIR.";
+      exit $rc;
+    fi
+  fi
+
+  if [ ! -d "$OS_PLUGIN_DIR/default" ]; then
+    mkdir -p "$OS_PLUGIN_DIR/default"
+    rc=$?;
+    if [[ $rc != 0 ]]; then
+      echo "Error: Could not create the default plugins directory $OS_PLUGIN_DIR/default. Please ensure you've appropriate rights to create the directory.";
+      exit $rc;
+    fi
+  fi
+
+  if [ ! -d "$OS_PLUGIN_DIR/paid" ]; then
+    mkdir -p "$OS_PLUGIN_DIR/paid"
+    rc=$?;
+    if [[ $rc != 0 ]]; then
+      echo "Error: Could not create the paid plugins directory $OS_PLUGIN_DIR/paid. Please ensure you've appropriate rights to create the directory.";
+      exit $rc;
+    fi
+  fi
+
+  if [ ! -d "$OS_PLUGIN_DIR/zustomer" ]; then
+    mkdir -p "$OS_PLUGIN_DIR/zustomer"
+    rc=$?;
+    if [[ $rc != 0 ]]; then
+      echo "Error: Could not create the zustomer plugins directory $OS_PLUGIN_DIR/zustomer. Please ensure you've appropriate rights to create the directory.";
+      exit $rc;
+    fi
+  fi
+
+  if [ ! -d "$OS_DATA_DIR" ];then
+    mkdir -p $OS_DATA_DIR
+    rc=$?;
+    if [[ $rc != 0 ]]; then
+      echo "Error: Could not create the data directory $OS_DATA_DIR. Please ensure you've appropriate rights to create the directory.";
+      exit $rc;
+    fi
+  fi
+}
+
+backupOldBuild() {
+  echo "Creating backup directory $OS_DATA_DIR/old_builds/$BACKUP_DIR";
+ <code class="highlight"> mkdir -p $OS_DATA_DIR/old_builds/$BACKUP_DIR/plugins/{defaults,paid,zustomer}</code>
+  mkdir -p $OS_DATA_DIR/old_builds/$BACKUP_DIR/db-connectors
+  rc=$?;
+  if [[ $rc != 0 ]]; then
+    echo "Error: Could not create the builds backup directory $OS_DATA_DIR/old_builds/$BACKUP_DIR. Please ensure you've appropriate rights to create the directory.";
+    exit $rc;
+  fi
+
+  echo "Shutting down the Tomcat server ...";
+  $TOMCAT_PATH/bin/./shutdown.sh -force
+
+  echo "Waiting for the Tomcat server to shutdown ..."
+  sleep 5
+  
+  rc=$(ls $OS_PLUGIN_DIR/default/*.jar | wc -l)
+  if [[ $rc == 0 ]]; then
+    echo "Plugins of older version not found.";
+  else
+    echo "Taking backup of the $OS_PLUGIN_DIR/default folder ...";
+<code class="highlight">    mv $OS_PLUGIN_DIR/default/*.jar $OS_DATA_DIR/old_builds/$BACKUP_DIR/plugins/defaults
+    mv $OS_PLUGIN_DIR/paid/*.jar $OS_DATA_DIR/old_builds/$BACKUP_DIR/plugins/paid/
+    cp $OS_PLUGIN_DIR/zustomer/*.jar $OS_DATA_DIR/old_builds/$BACKUP_DIR/plugins/zustomer/ </code>
+  fi
+
+  #This code take backup of plugins present in orignal plugin_dir directory.
+  #From OpenSpecimen v7.1 onwards, Enterprise Edition plugins are stored in $OS_PLUGIN_DIR/default/ directory.
+  rc=$(ls $OS_PLUGIN_DIR/*.jar | wc -l)
+  if [[ $rc != 0 ]]; then
+    mkdir -p $OS_DATA_DIR/old_builds/$BACKUP_DIR/temp_plugins
+    mv $OS_PLUGIN_DIR/*.jar $OS_DATA_DIR/old_builds/$BACKUP_DIR/temp_plugins
+  fi
+
+  rc=$(ls $TOMCAT_PATH/webapps/$WAR_NAME.war | wc -l)
+  if [[ $rc == 0 ]]; then
+    echo "WAR of older version not found.";
+  else
+    echo "Taking backup of WAR file ...";
+    rm -rf $TOMCAT_HOME/webapps/$WAR_NAME
+    mv $TOMCAT_PATH/webapps/$WAR_NAME $OS_DATA_DIR/old_builds/$BACKUP_DIR/
+  fi
+
+  echo "Taking backup of the connector jars ...";
+  mv $TOMCAT_PATH/lib/mysql-connector*.jar $OS_DATA_DIR/old_builds/$BACKUP_DIR/db-connectors/
+  mv $TOMCAT_PATH/lib/ojdbc*.jar $OS_DATA_DIR/old_builds/$BACKUP_DIR/db-connectors/
+}
+
+<code class="hlight">
+ensureUpgrdPlugMatch() {
+</code>
+    # Store the output of the first command in a variable
+    <code class="highlight">plugin_csv_output=$(cat /usr/local/openspecimen/data/plugin.csv | cut -d'-' -f1-2) </code>
+        
+    # Store the output of the second command in another variable
+    <code class="highlight">new_plugins_output=$(ls new_plugins/ | cut -d'-' -f1-2) </code>
+       
+    # Compare the two outputs
+    <code class="highlight">if [[ "$plugin_csv_output" != "$new_plugins_output" ]]; then </code>
+        # Not matching, abort the script and prompt the user to download the missing plugins
+        <code class="highlight">missing_plugins=$(comm -3 <(echo "$plugin_csv_output" | sort) <(echo "$new_plugins_output" | sort) | tr '\n' ' ') </code>
+        <code class="highlight">echo "Plugins are not matched. Please download the following missing plugins: $missing_plugins and try to run again." </code>
+        <code class="highlight">exit 1 </code>
+    <code class="highlight">else </code>
+        # Matching, copy from new_plugins/* to /usr/local/openspecimen/plugins/paid/
+        <code class="highlight">cp new_plugins/* /usr/local/openspecimen/plugins/paid/ </code>
+        
+        # Find and move the older files from /usr/local/openspecimen/plugins/paid/ to old_plugins/
+        <code class="highlight">mkdir -p old_plugins/ </code>
+        <code class="highlight">find /usr/local/openspecimen/plugins/paid/ -type f -mtime +1 -exec mv -t old_plugins/ {} + </code>
+        <code class="highlight">echo "Plugins successfully copied and older files moved." </code>
+    <code class="highlight">fi </code>
+<code class="highlight"> }</code>
+deployNewBuild() {
+    echo "Web App name : $WAR_NAME";
+    
+    echo "Copying $PROPERTY_FILE to $TOMCAT_PATH/conf/$WAR_NAME.properties"
+    cp $PROPERTY_FILE $TOMCAT_PATH/conf/$WAR_NAME.properties
+  
+    echo "Copying database connector jars to $TOMCAT_PATH/lib"
+    cp db-connectors/mysql-connector*.jar $TOMCAT_PATH/lib/ 
+    cp db-connectors/ojdbc*.jar $TOMCAT_PATH/lib/
+  
+    echo "Copying new plugins ...";
+    cp plugin_build/*.jar $OS_PLUGIN_DIR/default
+
+  echo "Copying new WAR ...";
+  cp openspecimen.war $TOMCAT_PATH/webapps/$WAR_NAME.war
+
+  echo "Starting Tomcat server ...";
+  $TOMCAT_PATH/bin/./startup.sh
+
+  echo "#####################################################################"
+  echo "OpenSpecimen is installed successfully.Please check the log files."
+  echo "You can find log files at following locations: "
+  echo "Tomcat logs: $TOMCAT_PATH/logs/catalina.out"
+  echo "OpenSpecimen logs: $OS_DATA_DIR/logs/os.log"
+  echo "#####################################################################"
+}
+
+main() {
+  ensurePropsFileSpecified;
+  initVariables;
+  ensurePrerequisites;
+  ensureDataAndPluginDirsExist;
+  backupOldBuild;
+  <code class="highlight">ensureUpgrdPlugMatch;</code>
+  deployNewBuild;
+}
+
+main;
+</pre>
+      
+      <h2>Changes made in install.sh Script are highlighted above, and below is the explanation.</h2>
+      
+      <p>You can <a download href="install.sh">Download</a> current install.sh script for comparison.</p>
+      <h3><code>Inside the backupOldBuild()</code> Function</h3>
+      <p>Here we are creating a parent and child folder which are <code>plugins/{defaults, paid, zustomer}</code>.</p>
+      <pre><code>mkdir -p $OS_DATA_DIR/old_builds/$BACKUP_DIR/plugins/{defaults,paid,zustomer}</code>
+      </pre>
+        <h3>Copy all the old plugins inside the <code>$data/old_build/$BACKUP_DIR/plugins/</code> respective folders</h3>
+      <pre><code>echo "Taking backup of the $Respective/*.jar folder and its jar files ...";
+mv $OS_PLUGIN_DIR/default/*.jar $OS_DATA_DIR/old_builds/$BACKUP_DIR/plugins/defaults 
+mv $OS_PLUGIN_DIR/paid/*.jar $OS_DATA_DIR/old_builds/$BACKUP_DIR/plugins/paid/ 
+cp $OS_PLUGIN_DIR/zustomer/*.jar $OS_DATA_DIR/old_builds/$BACKUP_DIR/plugins/zustomer/</code>
+      </pre>
+      <p>Inside the <code>deployNewBuild()</code> Function, we are copying all the old plugins from <code>$OS_PLUGIN_DIR/default</code>, <code>$OS_PLUGIN_DIR/paid</code>, and <code>$OS_PLUGIN_DIR/zustomer</code> to the corresponding folders in <code>$OS_DATA_DIR/old_builds/$BACKUP_DIR/plugins</code>.</p>
+ 
+      <h3>Inside the <code>deployNewBuild()</code> Function</h3>
+      <pre><code>cp new_plugins/*.jar $OS_PLUGIN_DIR/paid</code></pre>
+      <p>We are copying the downloaded paid plugins from the <code>new_plugins</code> folder to the <code>$OS_PLUGIN_DIR/paid</code> folder.</p>
+
+      <hr><hr>
+
+      <h2>Additional changes to the Script:</h2>
+      
+  <h3>Latest changes are highlighted with Midnight Blue color.</h3>
+
+      <p>We have made the changes to the script which will take the backup and deploy all required plugins to the server with the help of user assistance.</p>
+      
+      <h2>Explanation:</h2>
+
+  <ol>
+  <li>The function <b>ensureUpgrdPlugMatch()</b> is defined without any input parameters..</li>
+
+  <br>
+  <li>It begins by storing the output of the first command in a variable named <b>plugin_csv_output</b>. The first command reads the contents of the file <i>/usr/local/openspecimen/data/plugin.csv</i>, and then uses <b>cut</b> to extract the first two fields from each line, using the delimiter <strong>`-`</strong>.</li>
+
+<br>  
+  <li>The output of the second command is stored in another variable named <b>new_plugins_output</b>. The second command lists the files in the <i>new_plugins/</i> directory and uses <b>cut</b> to extract the first two fields from each file name, using the delimiter <strong>`-`</strong>. </li>
+
+<br>  
+  <li>The function then proceeds to compare the two outputs stored in the variables <b>plugin_csv_output</b> and <b>new_plugins_output</b>.</li>
+
+<br>  
+  <li>If the two outputs do not match (i.e., there are missing plugins), the script will enter the <strong>`if`</strong> block.</li>
+
+<br>  
+  <li>Inside the <strong>`if`</strong> block, the script uses the <strong>`comm`</strong> command along with <strong>`sort`</strong> to find the missing plugins. It stores the missing plugin names in a variable called <b>missing_plugins</b>.</li>
+
+<br>  
+  <li>It then displays an error message indicating <i>that the plugins are not matched and prompts the user to download the <b>missing plugins</b> by listing the names in the <b>missing_plugins</b> variable</i>. After that, it aborts the script by using <b>exit 1</b> with a non-zero exit status.</li>
+
+<br>  
+  <li>If the two outputs match (i.e., all plugins are present), the script will enter the <strong>`else`</strong> block.</li>
+
+<br>  
+  <li>Inside the <strong>`else`</strong> block, the script proceeds to copy the files from the <i>new_plugins/ </i> directory to the <i> /usr/local/openspecimen/plugins/paid/</i> directory using the <strong>`cp`</strong> command.</li>
+
+<br>  
+  <li>The script then creates a directory named <i>old_plugins/</i> using the <b>mkdir -p </p>command to ensure it is created if it doesn't already exist.</li>
+
+<br>  
+  <li>It uses the <b>find</b> command with the </b>-type f -mtime +1 </b> option to locate files in the <i> /usr/local/openspecimen/plugins/paid/ </i> directory that are older than one day (modified more than one day ago).</li>
+
+<br>
+  <li>It <strong>`moves`</strong> the older files found by the <b>find</b> command to the <i>old_plugins/</i> directory using the mv command.</li>
+
+<br>  
+  <li>Finally, the script prints a success message indicating that <b><i>the plugins were successfully copied and older files were moved.</i></b></li>
+
+<br>
+</ol>   
+    </div>
+
+  </body>
+</html>
