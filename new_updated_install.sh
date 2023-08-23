@@ -155,38 +155,30 @@ ensureDataAndPluginDirsExist() {
   fi
 }
 
-checkANDcreate() {
+checkAndCreatePluginsCSV() {
 plugin_csv="$OS_DATA_DIR/plugin.csv"
 # Check if plugin.csv file is present
 if [ -f "$plugin_csv" ]; then
-    echo "File is present: $plugin_csv"
-else
-    # Check if {paid, zustomer} directories are present
-    if [ -d "$OS_PLUGIN_DIR/paid" ] || [ -d "$OS_PLUGIN_DIR/zustomer" ]; then
-        declare -A created_dirs  # Associative array to track created directories
-        
-        # Loop through paid and zustomer directories
-        for dir_name in "paid" "zustomer"; do
-            # Check if the directory exists and has files
-            if [ -d "$OS_PLUGIN_DIR/$dir_name" ] && [ "$(ls -A "$OS_PLUGIN_DIR/$dir_name")" ]; then
-                # Loop through files in the directory
-                for file_path in "$OS_PLUGIN_DIR/$dir_name/"*; do
-                    if [ -f "$file_path" ]; then
-                        folder_name="$dir_name"
-                        file_name=$(basename "$file_path" | cut -d',' -f2-3 | cut -d'-' -f1-2)
-                        echo "$folder_name,$file_name" >> "$plugin_csv"
-                    fi
-                done
-            fi
-        done
-        
-        if [ -f "$plugin_csv" ]; then
-            echo "Created $plugin_csv"
-        else
-            echo "No plugins are present in paid and zustomer."
+    rm -v $plugin_csv
+    # Loop through paid and zustomer directories
+    for dir_name in "paid" "zustomer"; do
+        # Check if the directory exists and has files
+        if [ -d "$OS_PLUGIN_DIR/$dir_name" ] && [ "$(ls -A "$OS_PLUGIN_DIR/$dir_name")" ]; then
+            # Loop through files in the directory
+            for file_path in "$OS_PLUGIN_DIR/$dir_name/"*; do
+                if [ -f "$file_path" ]; then
+                    folder_name="$dir_name"
+                    file_name=$(basename "$file_path" | cut -d',' -f2-3 | cut -d'-' -f1-2)
+                    echo "$folder_name,$file_name" >> "$plugin_csv"
+                fi
+            done
         fi
+    done
+
+    if [ -f "$plugin_csv" ]; then
+        echo "Created $plugin_csv"
     else
-        echo "Paid and zustomer directories are not present."
+        echo "No plugins are present in paid and zustomer."
     fi
 fi
 }
@@ -311,7 +303,7 @@ main() {
   initVariables;
   ensurePrerequisites;
   ensureDataAndPluginDirsExist;
-  checkANDcreate;
+  checkAndCreatePluginsCSV;
   compPaidPlug;
   backupOldBuild;
   deployMatchPlug
@@ -319,5 +311,3 @@ main() {
 }
 
 main;
-
-
