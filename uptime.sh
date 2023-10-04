@@ -2,14 +2,14 @@
 
 # Defining variable.
 website=("https://www.google.com" "www.facebox.com" "http://amit.com/" "http://zoro.to" "netflix.com")
-n_email="asta0linux@gmail.com"
+n_email="amit0linux@gmail.com"
 e_subject="Website is down."
 
 # creating a function which send an email with subject, body and recipient.
 send_notification() {
         subject="$e_subject: $1"
         body="The website $1 is not working. Please check why $2 Error occurs."
-        recipient="asta0linux@gmail.com"
+        recipient="amit0linux@gmail.com"
 
         echo -e "Subject:$subject\n$body" | sendmail "$recipient"
 }
