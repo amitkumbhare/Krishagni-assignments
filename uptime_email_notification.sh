@@ -18,7 +18,7 @@ declare -A emails_sent
 send_notification() {
         subject="$e_subject: $1"
         body="The website $1 is not working. Please check why $2 Error occurs."
-        recipient="asta0linux@gmail.com"
+        recipient="amitOlinux@gmail.com"
 
         echo -e "Subject:$subject\n$body" | sendmail "$recipient"
 }
