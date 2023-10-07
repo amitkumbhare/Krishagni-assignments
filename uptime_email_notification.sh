@@ -31,7 +31,7 @@ while true; do
         http_code=$(curl -s -o /dev/null -w "%{http_code}" "$website")
 
         # If the website is down (HTTP status code is not 200 OK)
-        if [ "$http_code" != "301" ]; then
+        if [ "$http_code" != "301" ] && [ "$http_code" != "200"  ]; then
 
             # Increment the failure count for this website
             failures["$website"]=$((failures["$website"] + 1))
@@ -72,4 +72,3 @@ while true; do
     # Sleep for 10 minutes before rechecking the websites
     sleep 600
 done
-
