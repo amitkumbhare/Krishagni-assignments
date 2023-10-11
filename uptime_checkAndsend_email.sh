@@ -57,7 +57,7 @@ while true; do
 			# Reset the failure and email count for this website.
 			failures["$website"]=0
 			emails_sent["$website"]=0
-			echo "Reset the value of $failure["$webiste"] and $emails_sent["$website"] to zero (0)."
+			echo "Reset the value of $failure["$webiste"] and $emails_sent["$website"] to zero."
 		fi
 	fi
     done
@@ -69,5 +69,5 @@ while true; do
     fi
 
     # Sleep for 10 minutes before rechecking the websites
-    sleep 20
+    sleep 600
 done
