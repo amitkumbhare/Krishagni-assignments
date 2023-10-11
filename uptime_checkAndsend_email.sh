@@ -8,7 +8,7 @@ max_email=5
 # Number of consecutive failures before sending email notifications.
 max_failures=5
 
-# Initialize an associative array to keep track of consecutive failures for each website.
+# Initialize an associative array to keep track of consecutive "failures" and "emails sent" for each website.
 declare -A failures
 
 declare -A emails_sent
@@ -25,6 +25,7 @@ send_notification() {
 while true; do
     # Initialize the local email max count for email.
     lmax_count=0
+    # Set flag to track whether all websites have reached the "max_email" count in each iteration.
     all_website_reach_max_email=true
     for website in "${websites[@]}"; do
         http_code=$(curl -s -o /dev/null -w "%{http_code}" "$website")
@@ -45,6 +46,7 @@ while true; do
                     emails_sent["$website"]=$((emails_sent["$website"] + 1))
 		    fi
 		fi
+  		# Check if the website reach the max_email count. 
 		if [ ${emails_sent["$website"]:-0} -lt "$max_email" ]; then
 		    all_website_reach_max_email=false
 		fi
