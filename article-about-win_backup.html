@@ -1,108 +1,215 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-<meta charset="UTF-8">
-<title>Smart Windows Backup Script - Detailed Guide</title>
-<style>
-    body { font-family: Arial, sans-serif; line-height: 1.6; background: #f8f9fa; color: #333; padding: 20px; }
-    h1, h2 { color: #0056b3; }
-    code { background: #eee; padding: 2px 4px; border-radius: 4px; }
-    pre { background: #eee; padding: 10px; border-radius: 5px; overflow-x: auto; }
-    ul { margin-left: 20px; }
-    .section { background: white; padding: 15px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-</style>
+	<title>Smart Windows Backup Script - Detailed Guide</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			font-size: 16px;
+			line-height: 1.5;
+			color: #333;
+			margin: 0;
+			padding: 0;
+			background-color: #f7f7f7;
+		}
+
+		.container {
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 20px;
+			background-color: #fff;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		}
+
+		h1 {
+			font-size: 32px;
+			margin-bottom: 20px;
+			text-align: center;
+			color: #333;
+		}
+
+		p {
+			margin-bottom: 20px;
+			line-height: 1.5;
+		}
+
+		pre {
+			background-color: #f5f5f5;
+			padding: 10px;
+			overflow-x: auto;
+			font-family: "Courier New", monospace;
+			font-size: 14px;
+			line-height: 1.2;
+			color: #333;
+		}
+
+		.output-image {
+			display: block;
+			margin-top: 20px;
+			max-width: 100%;
+			height: auto;
+		}
+
+		/* Style the menu bar */
+		.menu {
+			background-color: #333;
+			color: white;
+			width: 200px;
+			height: 100%;
+			position: fixed;
+			top: 0;
+			left: 0;
+			padding: 20px;
+		}
+
+		/* Style the menu items */
+		.menu a {
+			display: block;
+			color: white;
+			padding: 10px;
+			text-decoration: none;
+		}
+
+		/* Style the selected menu item */
+		.menu a.active {
+			background-color: #4CAF50;
+		}
+
+		/* Style the page content */
+		.content {
+			margin-left: 200px;
+			padding: 20px;
+		}
+
+		/* Adding CSS to the table */
+		table {
+			border-collapse: collapse;
+			width: 100%;
+			padding: 10px;
+		}
+
+		th,
+		td {
+			text-align: left;
+			padding: 8px;
+			border: 1px solid black;
+		}
+
+		th {
+			background-color: #f2f2f2;
+		}
+	</style>
 </head>
+
 <body>
+	<div class="container">
+		<!-- Menu bar -->
+		<div class="menu">
+			<!--a href="index.html">Home</a-->
+			<a href="article_index.html">Article</a>
+			<a href="article-about-grep.html">Article On GREP with CSV File</a>
+			<a href="article-about-awk.html">Article On AWK</a></li>
+			<a href="article-about-ip-addresses.html">Article About IP Addresses</a>
+			<a href="article-about-win_backup.html" class="active">Article About Smart Windows Backup</a>
+			<!--a href="copy-data-from-one-file-to-another.html">Copy Data from One File to Another</a>
+                        <a href="find_the_Largest_Number.html" class="active">Find the Largest Number</a>
+                        <a href="print-weekday-or-working-day.html">Print Weekday or Working Day</a>
+                        <a href="print_matching_keyword_line.html">Print Matching Keyword Line</a>
+                        <a href="send-multiple-file-in-loop-on-single-sftp-server.html">Send Multiple File in Loop on Single SFTP Server</a>
+                        <a href="upload-file-using-sftp.html">Upload File Using SFTP</a-->
+		</div>
+		
 
-<h1>Smart Windows Backup Script - Detailed Guide</h1>
-<p><strong>Author:</strong> Amit Arjun Kumbhare</p>
-<p>This guide explains how the provided PowerShell script works, its main features, and how to automate it using Windows Task Scheduler.</p>
 
-<div class="section">
-<h2>1. Overview</h2>
-<p>The script performs smart backups of full drives or selected folders to an external drive. It includes:</p>
-<ul>
-    <li>Full or folder-based backup options</li>
-    <li>Log file management with rotation & compression</li>
-    <li>Old backup cleanup (automatic removal of files older than 5 days)</li>
-    <li>Disk space check before backup</li>
-    <li>Toast notifications for user feedback</li>
-    <li>Structured logging in JSON format for easy reading</li>
-</ul>
-</div>
+		<h1>Smart Windows Backup Script - Detailed Guide</h1>
+		<p><strong>Author:</strong> Amit Arjun Kumbhare</p>
+		<p>This guide explains how the provided PowerShell script works, its main features, and how to automate it using Windows Task Scheduler.</p>
 
-<div class="section">
-<h2>2. Script Features & Functions</h2>
+		<div class="section">
+		<h2>1. Overview</h2>
+		<p>The script performs smart backups of full drives or selected folders to an external drive. It includes:</p>
+		<ul>
+		    <li>Full or folder-based backup options</li>
+		    <li>Log file management with rotation & compression</li>
+		    <li>Old backup cleanup (automatic removal of files older than 5 days)</li>
+		    <li>Disk space check before backup</li>
+		    <li>Toast notifications for user feedback</li>
+		    <li>Structured logging in JSON format for easy reading</li>
+		</ul>
+		</div>
 
-<h3>Show-Notification</h3>
-<p>Displays a Windows notification when the backup starts, ends, or fails.</p>
+		<div class="section">
+		<h2>2. Script Features & Functions</h2>
 
-<h3>Write-Log</h3>
-<p>Appends backup activity messages to a log file stored at:  
-<code>C:\Program Files\windows_backup_logs\windows_backup.log</code></p>
+		<h3>Show-Notification</h3>
+		<li>Displays a Windows notification when the backup starts, ends, or fails.</li>
 
-<h3>Rotate-Logs</h3>
-<p>If the log file grows beyond 100 MB, it compresses it into a <code>.zip</code> file and keeps only the last 5 compressed logs.</p>
+		<h3>Write-Log</h3>
+		<li>Appends backup activity messages to a log file stored at:</li>
+		<pre><code>C:\Program Files\windows_backup_logs\windows_backup.log</code></pre>
 
-<h3>Get-InternalDrives / Get-BackupTargetDrive</h3>
-<p>Detects internal drives to back up from, and external drives to save the backup to.</p>
+		<h3>Rotate-Logs</h3>
+		<li>If the log file grows beyond 100 MB, it compresses it into a <code>.zip</code> file and keeps only the last 5 compressed logs.</li>
 
-<h3>Select-FoldersFromDrive</h3>
-<p>Allows the user to choose specific folders from a selected drive for backup.</p>
+		<h3>Get-InternalDrives / Get-BackupTargetDrive</h3>
+		<li>Detects internal drives to back up from, and external drives to save the backup to.</li>
 
-<h3>Get-DirectorySize</h3>
-<p>Calculates the size of a directory using <code>robocopy</code> (to ensure accurate byte count).</p>
+		<h3>Select-FoldersFromDrive</h3>
+		<li>Allows the user to choose specific folders from a selected drive for backup.</li>
 
-<h3>Cleanup-OldBackups</h3>
-<p>Deletes <code>.gz</code> files older than 5 days in the backup directory to free space.</p>
+		<h3>Get-DirectorySize</h3>
+		<li>Calculates the size of a directory using <code>robocopy</code> (to ensure accurate byte count).</li>
 
-<h3>Log-StructuredEvent</h3>
-<p>Logs detailed backup information (source, destination, size, status) in JSON format.</p>
+		<h3>Cleanup-OldBackups</h3>
+		<li>Deletes <code>.gz</code> files older than 5 days in the backup directory to free space.</li>
 
-<h3>Main Logic</h3>
-<ul>
-    <li>Rotates logs if needed</li>
-    <li>Shows "Backup starting" notification</li>
-    <li>Detects internal drives</li>
-    <li>Prompts for backup type (full drive or selected folders)</li>
-    <li>Checks external drive space before backup</li>
-    <li>Compresses files using <code>7z</code> and stores them in <code>backups</code> folder on the external drive</li>
-    <li>Shows success or failure notification</li>
-</ul>
-</div>
+		<h3>Log-StructuredEvent</h3>
+		<li>Logs detailed backup information (source, destination, size, status) in JSON format.</li>
 
-<div class="section">
-<h2>3. Running the Script via Task Scheduler</h2>
-<p>Follow these steps to automate this script in Windows Task Scheduler:</p>
-<ol>
-    <li>Save the script as <code>smart_backup.ps1</code> in a secure location (e.g., <code>C:\Scripts\smart_backup.ps1</code>).</li>
-    <li>Open <strong>Task Scheduler</strong> (Press <code>Win + S</code> → type "Task Scheduler" → Enter).</li>
-    <li>Click <strong>Create Basic Task</strong> in the right-hand Actions panel.</li>
-    <li>Enter a name (e.g., <em>Smart Backup</em>) and description, click <strong>Next</strong>.</li>
-    <li>Select when you want the backup to run (Daily, Weekly, etc.), click <strong>Next</strong>.</li>
-    <li>Set the start time and frequency, click <strong>Next</strong>.</li>
-    <li>In the <strong>Action</strong> step, choose <strong>Start a program</strong>.</li>
-    <li>In the <em>Program/script</em> box, type:
-        <pre>powershell.exe</pre>
-    </li>
-    <li>In the <em>Add arguments</em> box, type:
-        <pre>-ExecutionPolicy Bypass -File "C:\Scripts\smart_backup.ps1"</pre>
-    </li>
-    <li>Click <strong>Next</strong>, review, and click <strong>Finish</strong>.</li>
-    <li>In Task Scheduler, right-click your new task → <strong>Properties</strong> → Check "Run with highest privileges".</li>
-</ol>
-<p><strong>Note:</strong> Ensure <code>7z</code> is installed and added to the Windows PATH for compression to work.</p>
-</div>
+		<h3>Main Logic</h3>
+		<ul>
+		    <li>Rotates logs if needed</li>
+		    <li>Shows "Backup starting" notification</li>
+		    <li>Detects internal drives</li>
+		    <li>Prompts for backup type (full drive or selected folders)</li>
+		    <li>Checks external drive space before backup</li>
+		    <li>Compresses files using <code>7z</code> and stores them in <code>backups</code> folder on the external drive</li>
+		    <li>Shows success or failure notification</li>
+		</ul>
+		</div>
 
-<div class="section">
-<h2>4. Tips & Best Practices</h2>
-<ul>
-    <li>Run the script manually the first time to verify functionality.</li>
-    <li>Store backups on a different physical drive for safety.</li>
-    <li>Monitor the log folder to ensure old logs are being rotated correctly.</li>
-    <li>Use an external SSD/HDD for faster backup speeds.</li>
-</ul>
-</div>
+		<div class="section">
+		<h2>3. Running the Script via Task Scheduler</h2>
+		<p>Follow these steps to automate this script in Windows Task Scheduler:</p>
+		<ol>
+		    <li>Save the script as <code>smart_backup.ps1</code> in a secure location (e.g., <code>C:\Scripts\smart_backup.ps1</code>).</li>
+		    <li>Open <strong>Task Scheduler</strong> (Press <code>Win + S</code> → type "Task Scheduler" → Enter).</li>
+		    <li>Click <strong>Create Basic Task</strong> in the right-hand Actions panel.</li>
+		    <li>Enter a name (e.g., <em>Smart Backup</em>) and description, click <strong>Next</strong>.</li>
+		    <li>Select when you want the backup to run (Daily, Weekly, etc.), click <strong>Next</strong>.</li>
+		    <li>Set the start time and frequency, click <strong>Next</strong>.</li>
+		    <li>In the <strong>Action</strong> step, choose <strong>Start a program</strong>.</li>
+		    <li>In the <em>Program/script</em> box, type:
+			  <pre>powershell.exe</pre>
+		    </li>
+		    <li>In the <em>Add arguments</em> box, type:
+			  <pre>-ExecutionPolicy Bypass -File "C:\Scripts\smart_backup.ps1"</pre>
+		    </li>
+		    <li>Click <strong>Next</strong>, review, and click <strong>Finish</strong>.</li>
+		    <li>In Task Scheduler, right-click your new task → <strong>Properties</strong> → Check "Run with highest privileges".</li>
+		</ol>
+		<p><strong>Note:</strong> Ensure <code>7z</code> is installed and added to the Windows PATH for compression to work.</p>
+		</div>
 
+		<div class="section">
+		<h2>4. Tips & Best Practices</h2>
+		<ul>
+		    <li>Run the script manually the first time to verify functionality.</li>
+		    <li>Store backups on a different physical drive for safety.</li>
+		    <li>Monitor the log folder to ensure old logs are being rotated correctly.</li>
+		    <li>Use an external SSD/HDD for faster backup speeds.</li>
+		</ul>
+		</div>
+	</div>
 </body>
-</html>
